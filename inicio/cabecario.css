@@ -1,0 +1,37 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #ebf3fd;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#cabecario {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+#cabecario a {
+    text-decoration: none;
+    color: #4a90e2;
+    font-weight: bold;
+}
+
+#cabecario img {
+    height: 100px;
+}
+
+#texto {
+    text-align: center;
+}
+
+#texto h1,
+#texto p {
+    margin: 0;
+}
+
+#texto p {
+    font-size: 18px;
+    color: #555;
+}

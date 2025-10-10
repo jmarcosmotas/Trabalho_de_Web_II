@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Agendamento de Consulta</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="cabecario.css">
+</head>
+
+<body>
+
+  <!-- ------------------------------Cabecario---------------------------------------------->
+  <header id="cabecario">
+    <img src="../imagens/logo.png" alt="Logo do Hospital">
+    <div><a href="../Login/login.html" id="login-entra">Entrar</a> / <a href="../Login/cadastro.html">Cadastrar-se</a>
+    </div>
+  </header>
+
+  <div id="texto">
+    <h1>Marque facil sua consulta</h1>
+  </div>
+
+  <!-- Cidade https://cdn-icons-png.flaticon.com/512/3991/3991230.png -->
+  <!-- Hostipa https://cdn-icons-png.flaticon.com/512/3063/3063176.png-->
+  <!-- especialidade https://cdn-icons-png.flaticon.com/512/2504/2504263.png -->
+
+  <!---------------------------------Formulário--------------------------------------------->
+  <div id="caixa">
+    <form action="#" method="post">
+      <label for="cidade"><img src="https://cdn-icons-png.flaticon.com/512/3367/3367662.png "> Cidade:</label>
+      <select id="cidade" name="cidade" required>
+        <option value="">Escolha a cidade</option>
+        <option value="Picos">Picos</option>
+        <option value="Teresina">Teresina</option>
+        <option value="Parnaíba">Parnaíba</option>
+        <option value="Floriano">Floriano</option>
+      </select>
+
+      <label for="hospital"><img src="   https://cdn-icons-png.flaticon.com/512/3063/3063176.png "> Hospital:</label>
+      <select id="hospital" name="hospital" required>
+        <option value="">Escolha o hospital</option>
+        <option value="Hospital Central">Hospital Central</option>
+        <option value="Hospital São Lucas">Hospital São Lucas</option>
+        <option value="Clínica Vida">Clínica Vida</option>
+      </select>
+
+      <label for="especialidade"><img src="https://cdn-icons-png.flaticon.com/512/4850/4850909.png">
+        Especialidade:</label>
+      <select id="especialidade" name="especialidade" required>
+        <option value="">Escolha a especialidade</option>
+        <option value="Cardiologia">Cardiologia</option>
+        <option value="Ortopedia">Ortopedia</option>
+        <option value="Dermatologia">Dermatologia</option>
+        <option value="Pediatria">Pediatria</option>
+        <option value="Ginecologia">Ginecologia</option>
+      </select>
+
+      <a href="marqua-consulta.html"><button type="submit"
+          onclick="window.location.href='marqua-consulta.html'">Agendar</button></a>
+    </form>
+  </div>
+</body>
+
+</html>

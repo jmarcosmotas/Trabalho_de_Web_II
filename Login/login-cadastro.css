@@ -1,0 +1,82 @@
+body{
+    background-color: #ebf3fd;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;  
+    align-items: center;      
+    min-height: 100vh;            
+    margin: 15px;
+}
+
+#caixa-formulario{
+    margin: auto ;
+    background-color: #ffff;
+    width: 450px;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    justify-content: center;
+}
+
+.caixa-digita{
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.caixa-digita label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.caixa-digita input{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+#botao-cadastro{
+    display: flex;
+    flex-direction: column;               
+    align-items: center; 
+    gap: 15px;    
+}
+
+#link{
+    text-decoration: none;
+}
+
+#link:hover{
+    text-decoration: underline;
+}
+
+#botao{
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;        
+    outline: none;        
+    background-color: rgb(43, 43, 255);
+    font-size: 18px;
+    color: #ffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    font-weight: bold; 
+}
+
+#botao:hover{
+    transform: scale(1.01);          
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); 
+    cursor: pointer;   
+}            
+
+#texto{
+    text-align: center;
+    width: 300px; 
+    margin: 0 auto; 
+    font-size: 18px;
+}
