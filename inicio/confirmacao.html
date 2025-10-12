@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Consulta</title>
+    <link rel="stylesheet" href="cabecario.css">
+    <link rel="stylesheet" href="confirmacao.css">
+</head>
+
+<body>
+    <!-- ------------------------------Cabecario---------------------------------------------->
+    <header id="cabecario">
+        <img src="../imagens/logo.png" id="logo" alt="Logo do Hospital">
+
+        <div id="login">
+            <div class="perfil">
+                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Ícone do perfil">
+
+                <ul class="submenu">
+                    <li><a href="confirmacao.html?origem=modificaPagina" onclick="mudificaPagina()">Consultas
+                            marcadas</a></li>
+                    <li><a href="../Login/altera-cadastro.html">Alterar Cadastro</a></li>
+                    <li><a href="#">Sair</a></li>
+                </ul>
+            </div>
+
+            <div class="links">
+                <a href="../Login/login.html" id="login-entra">Entrar</a> /
+                <a href="../Login/cadastro.html">Cadastrar-se</a>
+            </div>
+        </div>
+
+    </header>
+
+    <div id="texto">
+        <h1 id="mudaTexto">Confirme sua Consulta</h1>
+    </div>
+
+    <!-- ----------------------------Confirmação de Consulta---------------------------------->
+    <div class="caixa-confirmacao">
+
+        <div id="esq">
+            <h3>Paciente</h3>
+            <div label-input>
+                <label>Nome:</label>
+                <input type="text" value="Nome do Paciente" readonly>
+            </div>
+            <div label-input>
+                <label>CPF:</label>
+                <input type="text" value="000.000.00-00" readonly>
+            </div>
+            <div label-input>
+                <label>Data de Nascimento:</label>
+                <input type="text" value="00/05/000" readonly>
+            </div>
+            <div label-input>
+                <label>Telefone:</label>
+                <input type="text" value="(89) 99999-9999" readonly>
+            </div>
+        </div>
+
+        <div id="cen">
+            <h3>Médico</h3>
+            <div label-input>
+                <label>Nome:</label>
+                <input type="text" value="Dr. Fulano de Tal" readonly>
+            </div>
+            <div label-input>
+                <label>Especialidade:</label>
+                <input type="text" value="Especialidade" readonly>
+            </div>
+            <div label-input>
+                <label>CRM:</label>
+                <input type="text" id="info" value="000000" readonly>
+            </div>
+        </div>
+
+        <div id="dir">
+            <h3>Informações da Consulta</h3>
+            <div label-input>
+                <label>Hospital:</label>
+                <input type="text" value="Nome do Hospital" readonly>
+            </div>
+            <div label-input>
+                <label>Cidade:</label>
+                <input type="text" value="Cidade - PI" readonly>
+            </div>
+            <div id="lado">
+                <div label-input>
+                    <label>Horário:</label>
+                    <input type="text" value="00:00" readonly>
+                </div>
+                <div label-input>
+                    <label>Data:</label>
+                    <input type="text" value="00/00/0000" readonly>
+                </div>
+            </div>
+            <div label-input>
+                <label>Endereço:</label>
+                <input type="text" id="reu" value="Rua Projetada" readonly>
+            </div>
+
+        </div>
+
+        <div id="div-botao">
+            <button id="botao-confirmar">Confirmar</button>
+            <button id="botao" onclick="window.location.href='marqua_consulta.html'">Voltar</button>
+        </div>
+    </div>
+    <!-- Modal Personalizado -->
+    <!-- Modal Personalizado -->
+    <div id="modal" class="modal">
+        <div class="modal-conteudo">
+            <h4 id="modal-titulo">Sucesso!</h4>
+            <p id="modal-mensagem">Consulta confirmada com sucesso!</p>
+            <button id="modal-ok">OK</button>
+        </div>
+    </div>
+    <script src="confirmacao.js"></script>
+</body>
+
+</html>

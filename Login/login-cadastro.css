@@ -1,6 +1,6 @@
 body{
-    background-color: #ebf3fd;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #ebf3fd;
     display: flex;
     justify-content: center;  
     align-items: center;      
@@ -66,6 +66,7 @@ body{
     color: #ffff;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     font-weight: bold; 
+   justify-content: center;
 }
 
 #botao:hover{

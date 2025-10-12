@@ -6,37 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda sua Consulta</title>
     <link rel="stylesheet" href="cabecario.css">
-    <link rel="stylesheet" href="marqua-consulta.css">
-
+    <link rel="stylesheet" href="marqua_consulta.css">
 </head>
 
 <body>
     <!-- ------------------------------Cabecario---------------------------------------------->
     <header id="cabecario">
-        <img src="../imagens/logo.png" alt="Logo do Hospital">
-        <div><a href="../Login/login.html" id="login-entra">Entrar</a> / <a
-                href="../Login/cadastro.html">Cadastrar-se</a></div>
+        <img src="../imagens/logo.png" id="logo" alt="Logo do Hospital">
+
+        <div id="login">
+            <div class="perfil">
+                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Ícone do perfil">
+
+                <ul class="submenu">
+                    <li><a href="confirmacao.html?origem=modificaPagina" onclick="mudificaPagina()">Consultas marcadas</a></li>
+                    <li><a href="../Login/altera-cadastro.html">Alterar Cadastro</a></li>
+                    <li><a href="#">Sair</a></li>
+                </ul>
+            </div>
+
+            <div class="links">
+                <a href="../Login/login.html" id="login-entra">Entrar</a> /
+                <a href="../Login/cadastro.html">Cadastrar-se</a>
+            </div>
+        </div>
+
     </header>
 
     <div id="texto">
-        <h1>Cardiologia de Picos</h1>
-        <p>Hospital Regional</p>
+        <h1>Especialista do Hospital</h1>
     </div>
 
     <!----------------------------Agenda data Consulta------------------------------------------->
     <div id="caixa-perfil">
         <div id="perfil">
             <div id="centro-perfil">
-                <img id="foto-perfil"
-                    src="https://img.freepik.com/fotos-gratis/fundo-de-gotas-de-agua_23-2148098971.jpg"
+                <img id="foto-perfil" src="https://cdn-icons-png.flaticon.com/512/4532/4532517.png"
                     alt="Foto do médico">
                 <div>
-                    <h2>Dr. João Marcos da Mota Silva</h2>
-                    <p>Especialidade: Clínico Geral</p>
-                    <p>CRM: 9938937</p>
+                    <h2>Dr. Fulano</h2>
+                    <p><strong>Especialidade:</strong> Clínico Geral</p>
+                    <p><strong>CRM:</strong> 9938937</p>
                 </div>
             </div>
-            <p>Atendimento humanizado e especializado.</p>
+            <p>Sou Dr. Fulano de Tal, clínico geral formado em Medicina pela Universidade Federal UF no ano de 2025.
+                Atuo com foco na prevenção, tratamento e orientação à saúde, buscando sempre o bem-estar físico e
+                emocional de cada paciente. Atualmente, realizo atendimentos no Hospital São Lucas, onde ofereço
+                consultas voltadas à avaliação geral de saúde.</p>
+            <p id="p"> <strong>Endereço da Consulta:</strong> Rua Progetada, Nº 150</p>
         </div>
 
         <div id="agenda">
@@ -74,7 +91,7 @@
         </div>
     </div>
 
-    <script src="index.js"></script>
+    <script src="marqua_consulta.js"></script>
 
 </body>
 

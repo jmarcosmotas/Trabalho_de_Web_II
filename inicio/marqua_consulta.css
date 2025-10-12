@@ -1,3 +1,9 @@
+#nome-hosptal{
+    display: flex;
+    margin: 0px;
+    justify-content: center;
+    margin-top: -15px;
+}
 #caixa-perfil {
     display: flex;
     justify-content: center;
@@ -14,10 +20,20 @@
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 #perfil {
+    display: flex;
+    flex-direction: column;  
+    justify-content: space-between;
     width: 500px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 #centro-perfil {
@@ -38,7 +54,6 @@
 #agenda {
     width: 600px;
     text-align: center;
-    justify-content: center;
 }
 
 #agenda h2 {
@@ -47,16 +62,18 @@
 }
 
 .calendario {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
     border: 1px solid #ccc;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: white;
-    width: 100%;
 }
 
 .calendario-header {
-    background-color: #4a90e2;
+    background-color:#2b2bff;
     color: white;
     text-align: center;
     padding: 10px;
@@ -65,22 +82,24 @@
 }
 
 table {
-    width: 100%;
+    width: 100%;          
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 th {
-    width: 14.2%;
-    vertical-align: top;
-    border: 1px solid #e0e0e0;
+    border-bottom: none; 
     padding: 10px;
+    text-align: center;
+    vertical-align: top;
+    width: 1.28%;        
 }
 
 .dia {
     display: block;
     font-weight: bold;
     margin-bottom: 10px;
-    color: #4a90e2;
+    color: #2b2bff;
 }
 
 .horarios {
@@ -90,7 +109,7 @@ th {
 }
 
 .horarios button {
-    background-color: #4a90e2;
+    background-color: #2b2bff;
     color: white;
     border: none;
     border-radius: 5px;
@@ -101,7 +120,7 @@ th {
 }
 
 .horarios button:hover {
-    background-color: #357ABD;
+    background-color: rgb(43, 43, 255);
 }
 
 .horarios button.passado {
@@ -109,4 +128,8 @@ th {
     color: #666;
     cursor: not-allowed;
     opacity: 0.6;
+}
+#perfil p:last-child {
+    margin-top: 50px; 
+    margin: 0; 
 }

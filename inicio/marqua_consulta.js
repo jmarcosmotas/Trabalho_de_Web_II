@@ -1,13 +1,13 @@
 const nomesDias = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
 const horariosPorDia = [
-    ["Domingo", "08:00", "09:00", "10:00", "11:00"],
-    ["Segunda", "09:00", "10:00", "14:00"],
-    ["Terça", "08:00", "09:00", "11:00", "15:00"],
-    ["Quarta"],
-    ["Quinta", "08:00", "14:00"],
-    ["Sexta", "08:00", "09:00", "10:00"],
-    ["Sábado"]
+    ["Dom", "08:00", "09:00", "10:00", "11:00"],
+    ["Seg", "08:00", "09:00", "10:00"],
+    ["Ter", "08:00", "09:00", "11:00", "15:00"],
+    ["Qua"],
+    ["Qui", "08:00", "14:00"],
+    ["Sex", "08:00", "09:00", "10:00"],
+    ["Sáb"]
 ];
 
 const ths = document.querySelectorAll("thead th");
@@ -60,7 +60,7 @@ ths.forEach((th, index) => {
             } else {
                 botao.onclick = () => {
                     const dataSelecionada = `${dia}/${mes}/${anoAtual}`;
-                    const url = `marcar.html?dia=${dataSelecionada}&horario=${hora}`;
+                    const url = `confirmacao.html?dia=${dataSelecionada}&horario=${hora}`;
                     window.location.href = url;
                 };
             }
