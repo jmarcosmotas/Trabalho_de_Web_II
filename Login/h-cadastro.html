@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro - Marque Fácil</title>
-  <link rel="stylesheet" href="login-cadastro.css">
+  <link rel="stylesheet" href="c-login-cadastro.css">
 </head>
+
 <body>
-  <form action="" id="caixa-formulario"> 
+  <form id="caixa-formulario" data-rota="/cadastra">
     <img src="../imagens/logo.png" alt="logo" id="logo-cadastro">
 
+    <p id="erro" style="color:red;"></p>
+    
     <div class="caixa-digita">
       <label for="nome">Nome Completo:</label>
       <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
@@ -47,16 +51,19 @@
 
     <div class="caixa-digita">
       <label for="confirmaSenha">Confirmar Senha:</label>
-        <input type="password" id="confirmaSenha" name="confirmaSenha" placeholder="Confirme sua senha" required>
+      <input type="password" id="confirmaSenha" placeholder="Confirme sua senha" required>
     </div>
-    
+
     <div id="botao-cadasto">
-      <button type="submit" id="botao">Cadastrar</button>        
-        <p>
-          Já tem conta? <a href="login.html" id="link">Entrar</a>
-        </p>
+      <button type="button" id="botao" onclick="cadastro(event)">Cadastrar</button>
+      <p>
+        Já tem conta? <a href="h-login.html" id="link">Entrar</a>
+      </p>
     </div>
   </form>
-  <script src="login-cadastro.js"></script>
-  </body>
+  <!-- <script src="login-cadastro.js"></script> -->
+  <script src="j-fetchAPIs.js"></script>
+
+</body>
+
 </html>

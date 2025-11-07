@@ -31,12 +31,16 @@ body {
     cursor: pointer;
 }
 
+
 #login img {
     height: 40px;
 }
 
-#login img {
-    height: 40px;
+#perfil-usuario {
+  display: flex;             
+  align-items: center;        
+  justify-content: center;
+  gap: 5px;                   
 }
 
 #texto {

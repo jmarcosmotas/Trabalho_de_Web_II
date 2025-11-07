@@ -5,34 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmar Consulta</title>
-    <link rel="stylesheet" href="cabecario.css">
-    <link rel="stylesheet" href="confirmacao.css">
+    <link rel="stylesheet" href="c-cabecario.css">
+    <link rel="stylesheet" href="c-confirmacao.css">
 </head>
 
 <body>
     <!-- ------------------------------Cabecario---------------------------------------------->
-    <header id="cabecario">
-        <img src="../imagens/logo.png" id="logo" alt="Logo do Hospital">
+  <header id="cabecario">
+    <img src="../imagens/logo.png" id="logo" alt="Logo do Hospital">
 
-        <div id="login">
-            <div class="perfil">
-                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Ícone do perfil">
-
-                <ul class="submenu">
-                    <li><a href="confirmacao.html?origem=modificaPagina" onclick="mudificaPagina()">Consultas
-                            marcadas</a></li>
-                    <li><a href="../Login/altera-cadastro.html">Alterar Cadastro</a></li>
-                    <li><a href="#">Sair</a></li>
-                </ul>
-            </div>
-
-            <div class="links">
-                <a href="../Login/login.html" id="login-entra">Entrar</a> /
-                <a href="../Login/cadastro.html">Cadastrar-se</a>
-            </div>
+    <div id="login">
+      <div id="perfil-usuario">
+        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Ícone do perfil">
+        <div id="oculto"></div>
+        <div class="links">
+          <a href="../Login/h-login.html" id="login-entra">Entrar</a> /
+          <a href="../Login/h-cadastro.html">Cadastrar-se</a>
         </div>
-
-    </header>
+        <ul class="submenu">
+          <li><a href="h-confirmacao.html?origem=modificaPagina" onclick="mudificaPagina()">Consultas marcadas</a></li>
+          <li><a href="../Login/h-altera-cadastro.html">Alterar Cadastro</a></li>
+          <li><a href="#">Sair</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
 
     <div id="texto">
         <h1 id="mudaTexto">Confirme sua Consulta</h1>
@@ -45,7 +42,7 @@
             <h3>Paciente</h3>  
             <div label-input>
                 <label>Nome:</label>
-                <input type="text" id="nome" readonly>
+                <input type="text" id="nome-pessoa" readonly>
             </div>
             <div label-input>
                 <label>CPF:</label>
@@ -53,7 +50,7 @@
             </div>
             <div label-input>
                 <label>Data de Nascimento:</label>
-                <input type="text" id="dataNascimento" readonly>
+                <input type="text" id="data-nascimento" readonly>
             </div>
             <div label-input>
                 <label>Telefone:</label>
@@ -65,15 +62,16 @@
             <h3>Médico</h3>
             <div label-input>
                 <label>Nome:</label>
-                <input type="text" value="Dr. Fulano de Tal" readonly>
+                <input type="text" id="nome-medico" readonly>
             </div>
             <div label-input>
                 <label>Especialidade:</label>
-                <input type="text" value="Especialidade" readonly>
+                <input type="text" id="especialista" readonly>
             </div>
             <div label-input>
+
                 <label>CRM:</label>
-                <input type="text" id="info" value="000000" readonly>
+                <input type="text" id="crm"  readonly>
             </div>
         </div>
 
@@ -81,31 +79,31 @@
             <h3>Informações da Consulta</h3>
             <div label-input>
                 <label>Hospital:</label>
-                <input type="text" value="Nome do Hospital" readonly>
+                <input type="text" id="hospital" readonly>
             </div>
             <div label-input>
                 <label>Cidade:</label>
-                <input type="text" value="Cidade - PI" readonly>
+                <input type="text" id="cidade" readonly>
             </div>
             <div id="lado">
                 <div label-input>
                     <label>Horário:</label>
-                    <input type="text" value="00:00" readonly>
+                    <input type="text" id="horario"  readonly>
                 </div>
                 <div label-input>
                     <label>Data:</label>
-                    <input type="text" value="00/00/0000" readonly>
+                    <input type="text" id="data" readonly>
                 </div>
             </div>
             <div label-input>
                 <label>Endereço:</label>
-                <input type="text" id="reu" value="Rua Projetada" readonly>
+                <input type="text" id="endereco"  readonly>
             </div>
 
         </div>
 
         <div id="div-botao">
-            <button id="botao" onclick="window.location.href='marcar_consulta.html'">Voltar</button>
+            <button id="botao" onclick="window.location.href='h-marcar_consulta.html'">Voltar</button>
             <button id="botao-confirmar">Confirmar</button>
         </div>
     </div>
@@ -113,17 +111,17 @@
     <!-- Modal Personalizado -->
     <div id="modal" class="modal">
         <div class="modal-conteudo">
-            <h4 id="modal-titulo">Sucesso!</h4>
-            <p id="modal-mensagem">Consulta confirmada com sucesso!</p>
+            <h4 id="modal-titulo"></h4>
+            <p id="modal-mensagem"></p>
             <button id="modal-ok">OK</button>
         </div>
     </div>
 
-    <script src="confirmacao.js"></script>
+    <script src="j-confirmacao.js"></script>
+    <script src="j-cookies.js"></script>
 
-    <script src="confirmacao.js"></script>
 
-<script>
+<!-- <script>
 document.addEventListener("DOMContentLoaded", function () {
     const paciente = JSON.parse(localStorage.getItem("pacienteLogado"));
 
@@ -167,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("telefone").value = formatarTelefone(paciente.telefone || "");
     }
 });
-</script>
+</script> -->
 
 </body>
 

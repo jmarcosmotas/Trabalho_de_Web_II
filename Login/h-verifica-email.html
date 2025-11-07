@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="login-cadastro.css">
+        <link rel="stylesheet" href="c-login-cadastro.css">
     </head>
     <body>
-        <form action="" id="caixa-formulario">
+        <form id="caixa-formulario" data-rota="/email">
             
             <img src="../imagens/logo.png" alt="logo" id="logo-cadastro">
 
@@ -15,16 +15,19 @@
                Informe o e-mail para o qual deseja redefinir a sua senha.
             </p>
 
+            <p id="erro" style="color:red;"></p>
+            
             <div class="caixa-digita">
                 <label for="email">E-mail:</label>
                 <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
             </div>
 
             <div class="botao-cadastro">
-                <a href="recuperar-senha.html"><button type="button" id="botao">Enviar</button></a>
-                <p><a href="login.html" id="link">Voltar ao Login</a></p> 
+                <button type="button" id="botao" onclick="verificaEmail(event)">Enviar</button>
+                <p><a href="h-login.html" id="link">Voltar ao Login</a></p> 
             </div>
 
         </form>
+        <script src="j-fetchAPIs.js"></script>
     </body>
 </html>

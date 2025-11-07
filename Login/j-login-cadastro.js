@@ -1,13 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("caixa-formulario");
 
-    // ------------VERIFICAÇÃO SE ESTAMOS NA PÁGINA DE LOGIN-------------
     if (window.location.pathname.includes("login.html")) {
         const cpfInput = document.getElementById("cpf");
         const senhaInput = document.getElementById("senha");
         const lembrarChk = document.getElementById("lembrar");
 
-        // Recupera CPF salvo, se houver
         const cpfSalvo = localStorage.getItem("cpfUsuario");
         if (cpfSalvo) {
             cpfInput.value = cpfSalvo;
@@ -35,15 +33,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 localStorage.setItem("pacienteLogado", JSON.stringify(paciente));
-                window.location.href = "../inicio/index.html"; // Redireciona corretamente
+                window.location.href = "../inicio/h-index.html"; 
             } else {
                 alert("CPF ou senha inválidos. Verifique e tente novamente!");
             }
         });
     }
 
-    // ----------------Verifica se estamos na página de cadastro------------------
-    else if (window.location.pathname.includes("cadastro.html")) {
+    else if (window.location.pathname.includes("h-cadastro.html")) {
         form.addEventListener("submit", function (event) {
             event.preventDefault();
 
@@ -68,8 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Já existe um cadastro com esse CPF!");
                 return;
             }
-
-            // Cria um novo paciente
             const novoPaciente = {
                 nome,
                 cpf,
@@ -84,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem("pacientes", JSON.stringify(pacientes));
 
             alert("Cadastro realizado com sucesso!");
-            window.location.href = "login.html";
+            window.location.href = "h-login.html";
         });
     }
 });

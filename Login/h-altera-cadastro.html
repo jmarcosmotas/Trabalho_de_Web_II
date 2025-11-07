@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro - Marque Fácil</title>
-  <link rel="stylesheet" href="login-cadastro.css">
+  <link rel="stylesheet" href="c-login-cadastro.css">
 </head>
 <body>
-  <form action="" id="caixa-formulario"> 
+  <form id="caixa-formulario" data-rota="/altera"> 
     <img src="../imagens/logo.png" alt="logo" id="logo-cadastro">
 
     <div class="caixa-digita">
@@ -27,12 +27,13 @@
 
     
     <div id="botao-cadasto">
-       <a href="../inicio/index.html"><button type="button" id="botao">Enviar</button></a>
+        <button type="button" id="botao" onclick="alteraCadastro()">Enviar</button>
         <p>
-          <a href="../inicio/index.html" id="link">Excluir Conta</a>
+          <a href="../inicio/h-index.html" id="link">Excluir Conta</a>
         </p>
     </div>
   </form>
-  <script src="login-cadastro.js"></script>
+  <!-- <script src="login-cadastro.js"></script> -->
+   <script src="j-fetchAPIs.js"></script>
   </body>
 </html>

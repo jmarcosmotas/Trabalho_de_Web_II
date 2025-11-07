@@ -5,33 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda sua Consulta</title>
-    <link rel="stylesheet" href="cabecario.css">
-    <link rel="stylesheet" href="marcar_consulta.css">
+    <link rel="stylesheet" href="c-cabecario.css">
+    <link rel="stylesheet" href="c-marcar_consulta.css">
 </head>
 
 <body>
-    <!-- ------------------------------Cabecario---------------------------------------------->
-    <header id="cabecario">
-        <img src="../imagens/logo.png" id="logo" alt="Logo do Hospital">
+    <!--------------------------------Cabecario---------------------------------------------->
+ 
+  <header id="cabecario">
+    <img src="../imagens/logo.png" id="logo" alt="Logo do Hospital">
 
-        <div id="login">
-            <div class="perfil">
-                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Ícone do perfil">
+    <div id="login">
+      <div id="perfil-usuario">
+        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Ícone do perfil">
+        <div id="oculto"></div>
+        <div class="links">
+          <a href="../Login/h-login.html" id="login-entra">Entrar</a> /
+          <a href="../Login/h-cadastro.html">Cadastrar-se</a>
+      </div>
+        <ul class="submenu">
+          <li><a href="h-confirmacao.html?origem=modificaPagina" onclick="mudificaPagina()">Consultas marcadas</a></li>
+          <li><a href="../Login/h-altera-cadastro.html">Alterar Cadastro</a></li>
+          <li><a href="#">Sair</a></li>
+        </ul>
+        
+      </div>
 
-                <ul class="submenu">
-                    <li><a href="confirmacao.html?origem=modificaPagina" onclick="mudificaPagina()">Consultas marcadas</a></li>
-                    <li><a href="../Login/altera-cadastro.html">Alterar Cadastro</a></li>
-                    <li><a href="#">Sair</a></li>
-                </ul>
-            </div>
-
-            <div class="links">
-                <a href="../Login/login.html" id="login-entra">Entrar</a> /
-                <a href="../Login/cadastro.html">Cadastrar-se</a>
-            </div>
-        </div>
-
-    </header>
+    </div>
+  </header>
 
     <div id="texto">
         <h1>Especialista do Hospital</h1>
@@ -44,16 +45,13 @@
                 <img id="foto-perfil" src="https://cdn-icons-png.flaticon.com/512/4532/4532517.png"
                     alt="Foto do médico">
                 <div>
-                    <h2>Dr. Fulano</h2>
-                    <p><strong>Especialidade:</strong> Clínico Geral</p>
-                    <p><strong>CRM:</strong> 9938937</p>
+                    <h2 id="nome-medico"></h2>
+                    <p id="esp-medico"></p>
+                    <p id="crm-medico"></p>
                 </div>
             </div>
-            <p>Sou Dr. Fulano de Tal, clínico geral formado em Medicina pela Universidade Federal UF no ano de 2025.
-                Atuo com foco na prevenção, tratamento e orientação à saúde, buscando sempre o bem-estar físico e
-                emocional de cada paciente. Atualmente, realizo atendimentos no Hospital São Lucas, onde ofereço
-                consultas voltadas à avaliação geral de saúde.</p>
-            <p id="p"> <strong>Endereço da Consulta:</strong> Rua Progetada, Nº 150</p>
+            <p id="texto-medico"></p>
+            <p id="end-Medico"></p>
         </div>
 
         <div id="agenda">
@@ -91,8 +89,8 @@
         </div>
     </div>
 
-    <script src="marcar_consulta.js"></script>
-
+    <script src="j-marcar_consulta.js"></script>
+    <script src="j-cookies.js"></script>
 </body>
 
 </html>

@@ -4,34 +4,33 @@
 <head>
   <meta charset="UTF-8">
   <title>Agendamento de Consulta</title>
-  <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="cabecario.css">
+  <link rel="stylesheet" href="c-index.css">
+  <link rel="stylesheet" href="c-cabecario.css">
 </head>
 
 <body>
-
   <!-- ------------------------------Cabecario---------------------------------------------->
-   <header id="cabecario">
-        <img src="../imagens/logo.png" id="logo" alt="Logo do Hospital">
+  <header id="cabecario">
+    <img src="../imagens/logo.png" id="logo" alt="Logo do Hospital">
 
-        <div id="login">
-            <div class="perfil">
-                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Ícone do perfil">
-
-                <ul class="submenu">
-                    <li><a href="confirmacao.html?origem=modificaPagina" onclick="mudificaPagina()">Consultas marcadas</a></li>
-                     <li><a href="../Login/altera-cadastro.html">Alterar Cadastro</a></li>
-                    <li><a href="#">Sair</a></li>
-                </ul>
-            </div>
-
-            <div class="links">
-                <a href="../Login/login.html" id="login-entra">Entrar</a> /
-                <a href="../Login/cadastro.html">Cadastrar-se</a>
-            </div>
+    <div id="login">
+      <div id="perfil-usuario">
+        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Ícone do perfil">
+        <div id="oculto"></div>
+        <div class="links">
+          <a href="../Login/h-login.html" id="login-entra">Entrar</a> /
+          <a href="../Login/h-cadastro.html">Cadastrar-se</a>
         </div>
+        <ul class="submenu">
+          <li><a href="h-confirmacao.html?origem=modificaPagina" onclick="mudificaPagina()">Consultas marcadas</a></li>
+          <li><a href="../Login/h-altera-cadastro.html">Alterar Cadastro</a></li>
+          <li><a href="#">Sair</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
 
-    </header>
+
   <div id="texto">
     <h1>Marque facil sua consulta</h1>
   </div>
@@ -59,10 +58,11 @@
         <option value="">Escolha a especialidade</option>
       </select>
 
-      <a href="marcar_consulta.html"><button type="submit"
-          onclick="window.location.href='marcar_consulta.html'">Agendar</button></a>
+      <button type="submit" id="botao">Agendar</button>
     </form>
   </div>
+  <script src="j-cookies.js"></script>
+  <script src="j-index.js"></script>
 </body>
 
 </html>
