@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro - Marque Fácil</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/login_cadastro.css') }}">
+</head>
+<body>
+  <form id="caixa-formulario" data-rota="/altera"> 
+    <img src="{{ url_for('static', filename='imagem/logo.png') }}" alt="logo" id="logo-cadastro">
+
+    <div class="caixa-digita">
+      <label for="nome">Nome Completo:</label>
+      <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+    </div>
+
+    <div class="caixa-digita">
+      <label for="dataNascimento">Telefone</label>
+      <input type="tel" id="dataNascimento" name="telefone" placeholder="(99) 99999-9999" required>
+    </div>
+
+    <div class="caixa-digita">
+      <label for="endereco">Endereço:</label>
+      <input type="text" id="endereco" name="endereco" placeholder="Rua, nº, Bairro, Cidade - UF" required>
+    </div>
+
+    
+    <div id="botao-cadasto">
+        <button type="button" id="botao" onclick="alteraCadastro()">Enviar</button>
+        <p>
+          <a href="{{url_for('home')}}" id="link">Excluir Conta</a>
+        </p>
+    </div>
+  </form>
+  <script src="{{ url_for('static', filename='script/fetchAPIs.js') }}"></script>
+  </body>
+</html>

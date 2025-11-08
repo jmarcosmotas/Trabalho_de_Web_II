@@ -1,0 +1,1 @@
+{'nome': 'joao', 'cpf': '123.456.678-00', 'email': 'joaomarcos0416@gmail.com', 'telefone': '89981263453', 'dataNascimento': '2025-11-07', 'endereco': 'Avenida Manoel de Sousa Santos Neto', 'senha': '12345678'}

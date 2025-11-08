@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Recupera Senha</title>
+         <link rel="stylesheet" href="{{ url_for('static', filename='css/login_cadastro.css') }}">
+    </head>
+    <body>
+        <form id="caixa-formulario" data-rota="/recupera">
+            <img src="{{ url_for('static', filename='imagem/logo.png') }}" alt="logo" id="logo-cadastro">
+
+            <div class="caixa-digita">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+            </div>
+
+            <div class="caixa-digita">
+                <label for="confirmaSenha">Confirmar Senha:</label>
+                <input type="password" id="confirmaSenha" placeholder="Confirme sua senha" required>
+            </div>
+
+            <div class="botao-cadastro">
+                <a href="{{url_for('login')}}"><button type="submit" id="botao" onclick="alteraSenha()">Redefinir Senha</button></a>
+                <p><a href="{{url_for('altera_senha')}}" id="link">Voltar</a></p> 
+            </div>
+        </form>
+        <script src="{{ url_for('static', filename='script/fetchAPIs.js') }}"></script>
+    </body>
+</html>

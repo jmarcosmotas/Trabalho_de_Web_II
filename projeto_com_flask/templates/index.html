@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Agendamento de Consulta</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cabecario.css') }}">
+</head>
+
+<body>
+  <!-- ------------------------------Cabecario---------------------------------------------->
+  <header id="cabecario">
+    <img src="{{ url_for('static', filename='imagem/logo.png') }}" id="logo" alt="Logo do Hospital">
+
+    <div id="login">
+      <div id="perfil-usuario">
+        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Ícone do perfil">
+        <div id="oculto"></div>
+        <div class="links">
+          <a href="{{ url_for('login') }}" id="login-entra">Entrar</a> /
+          <a href="{{ url_for('cadastro') }}">Cadastrar-se</a>
+        </div>
+        <ul class="submenu">
+          <li><a href="h-confirmacao.html?origem=modificaPagina" onclick="mudificaPagina()">Consultas marcadas</a></li>
+          <li><a href="{{ url_for('altera_cadastro') }}">Alterar Cadastro</a></li>
+          <li><a href="#">Sair</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  <div id="texto">
+    <h1>Marque facil sua consulta</h1>
+  </div>
+
+  <!-- Cidade https://cdn-icons-png.flaticon.com/512/3991/3991230.png -->
+  <!-- Hospital https://cdn-icons-png.flaticon.com/512/3063/3063176.png-->
+  <!-- especialidade https://cdn-icons-png.flaticon.com/512/2504/2504263.png -->
+
+  <!---------------------------------Formulário--------------------------------------------->
+  <div id="caixa">
+    <form method="post">
+      <label for="cidade"><img src="https://cdn-icons-png.flaticon.com/512/3367/3367662.png "> Cidade:</label>
+      <select id="cidade" name="cidade" required>
+        <option value="">Escolha a cidade</option>
+      </select>
+
+      <label for="hospital"><img src=" https://cdn-icons-png.flaticon.com/512/3063/3063176.png "> Hospital:</label>
+      <select id="hospital" name="hospital" required>
+        <option value="">Escolha o hospital</option>
+      </select>
+
+      <label for="especialidade"><img src="https://cdn-icons-png.flaticon.com/512/4850/4850909.png">
+        Especialidade:</label>
+      <select id="especialidade" name="especialidade" required>
+        <option value="">Escolha a especialidade</option>
+      </select>
+
+      <button type="submit" id="botao">Agendar</button>
+    </form>
+  </div>
+  <script src="{{ url_for('static', filename='script/cookies.js') }}"></script>
+  <script src="{{ url_for('static', filename='script/index.js') }}"></script>
+</body>
+
+</html>
