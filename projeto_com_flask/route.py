@@ -1,4 +1,4 @@
-from flask import render_template, request, jsonify, Response
+from flask import render_template, request, jsonify, Response, session
 from serve import app
 from write import *
 import base64
@@ -61,6 +61,8 @@ def api_login():
     dados = request.get_json()
     info_usuario = fazer_login(dados)
     if info_usuario:
+        # cria sessão do usuário
+        session['user'] = info_usuario
         return jsonify(info_usuario), 200
     else:
         return jsonify({"error": "CPF ou senha inválidos"}), 401
@@ -77,46 +79,58 @@ def api_informacoes():
         return jsonify({"especialista": ["Clínico Geral", "Cardiologia", "Dermatologia"]})
 
 
-@app.route('/api/confirma-consulta', methods=['POST'])
-def _unauthorized():
-    return Response('Unauthorized', 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
+def _unauthorized_json():
+    return jsonify({"error": "Unauthorized"}), 401
 
 
-def _check_basic_auth(auth_header: str) -> bool:
-    """Verifica o header Authorization do tipo Basic e valida contra fazer_login.
-
-    Espera que o username seja o CPF e a senha seja a senha do usuário.
-    """
-    if not auth_header:
-        return False
-    try:
-        parts = auth_header.split(None, 1)
-        if len(parts) != 2:
-            return False
-        scheme, credentials = parts
-        if scheme.lower() != 'basic':
-            return False
-        decoded = base64.b64decode(credentials).decode('utf-8')
-        cpf, senha = decoded.split(':', 1)
-        # usando o login que vc pediu
-        info = fazer_login({"cpf": cpf, "senha": senha})
-        return bool(info)
-    except Exception:
-        return False
-
-
-def requires_basic_auth(f):
+def requires_session_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        auth_header = request.headers.get('Authorization')
-        if not _check_basic_auth(auth_header):
-            return _unauthorized()
+        if not session.get('user'):
+            return _unauthorized_json()
         return f(*args, **kwargs)
     return decorated
 
 
+def requires_session_or_basic(f):
+    """Aceita autenticação por sessão (cookie) OU por HTTP Basic.
+
+    - Se o cliente já tiver `session['user']`, passa.
+    - Caso contrário, tenta ler o header Authorization Basic e validar via `autenticar`.
+    """
+    def check_basic():
+        auth = request.headers.get('Authorization')
+        if not auth:
+            return False
+        try:
+            parts = auth.split(None, 1)
+            if len(parts) != 2:
+                return False
+            scheme, creds = parts
+            if scheme.lower() != 'basic':
+                return False
+            decoded = base64.b64decode(creds).decode('utf-8')
+            cpf, senha = decoded.split(':', 1)
+            # usa a função que criamos em write.py
+            return autenticar(cpf, senha)
+        except Exception:
+            return False
+
+    @wraps(f)
+    def wrapped(*args, **kwargs):
+        # primeiro tenta sessão
+        if session.get('user'):
+            return f(*args, **kwargs)
+        # depois tenta Basic
+        if check_basic():
+            return f(*args, **kwargs)
+        return _unauthorized_json()
+
+    return wrapped
+
+
 @app.route('/api/confirma-consulta', methods=['POST'])
-@requires_basic_auth
+@requires_session_or_basic
 def api_confirma_consulta():
     dados = request.get_json()
     confirmar_consulta(dados)
