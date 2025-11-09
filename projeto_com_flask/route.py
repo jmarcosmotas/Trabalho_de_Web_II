@@ -1,6 +1,8 @@
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, Response
 from serve import app
 from write import *
+import base64
+from functools import wraps
 
 @app.route('/')
 def home():
@@ -76,9 +78,48 @@ def api_informacoes():
 
 
 @app.route('/api/confirma-consulta', methods=['POST'])
+def _unauthorized():
+    return Response('Unauthorized', 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
+
+
+def _check_basic_auth(auth_header: str) -> bool:
+    """Verifica o header Authorization do tipo Basic e valida contra fazer_login.
+
+    Espera que o username seja o CPF e a senha seja a senha do usuário.
+    """
+    if not auth_header:
+        return False
+    try:
+        parts = auth_header.split(None, 1)
+        if len(parts) != 2:
+            return False
+        scheme, credentials = parts
+        if scheme.lower() != 'basic':
+            return False
+        decoded = base64.b64decode(credentials).decode('utf-8')
+        cpf, senha = decoded.split(':', 1)
+        # usando o login que vc pediu
+        info = fazer_login({"cpf": cpf, "senha": senha})
+        return bool(info)
+    except Exception:
+        return False
+
+
+def requires_basic_auth(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth_header = request.headers.get('Authorization')
+        if not _check_basic_auth(auth_header):
+            return _unauthorized()
+        return f(*args, **kwargs)
+    return decorated
+
+
+@app.route('/api/confirma-consulta', methods=['POST'])
+@requires_basic_auth
 def api_confirma_consulta():
-    dados = request.get_json() 
-    confirmar_consulta(dados) 
+    dados = request.get_json()
+    confirmar_consulta(dados)
     return jsonify({"status": "ok"}) 
 
 

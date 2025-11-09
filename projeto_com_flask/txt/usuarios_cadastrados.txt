@@ -3,3 +3,4 @@
 {'nome': 'Silva', 'cpf': '111.111.111-00', 'email': 'joaomarcos0416@outlook.com', 'telefone': '89981263453', 'dataNascimento': '2025-11-01', 'endereco': 'Avenida Manoel de Sousa Santos Neto', 'senha': '123'}
 {'nome': 'mota', 'cpf': '222.222.222-11', 'email': 'joaomarcos0416@outlook.com', 'telefone': '89981263453', 'dataNascimento': '2025-11-28', 'endereco': 'Avenida Manoel de Sousa Santos Neto', 'senha': '123'}
 {'nome': 'maria', 'cpf': '333.333.333-11', 'email': 'joaomarcos0416@outlook.com', 'telefone': '89981263453', 'dataNascimento': '2025-11-28', 'endereco': 'Avenida Manoel de Sousa Santos Neto', 'senha': '123'}
+{'nome': 'admin', 'cpf': '123.456.789-00', 'email': 'arcturusgamer1203@gmail.com', 'telefone': '89994627893', 'dataNascimento': '3434-03-03', 'endereco': 'Rua Vereador Erasmo Albano, Número 200.', 'senha': '321'}

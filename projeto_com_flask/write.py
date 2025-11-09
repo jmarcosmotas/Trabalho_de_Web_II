@@ -36,5 +36,15 @@ def fazer_login(dados):
     return {}  
 
 
+def autenticar(cpf, senha):
+    """Retorna True se as credenciais (cpf, senha) forem válidas, False caso contrário.
+
+    Implementado reutilizando `fazer_login` que já carrega e valida o usuário
+    a partir do arquivo `txt/usuarios_cadastrados.txt`.
+    """
+    info = fazer_login({"cpf": cpf, "senha": senha})
+    return bool(info)
+
+
 
 
