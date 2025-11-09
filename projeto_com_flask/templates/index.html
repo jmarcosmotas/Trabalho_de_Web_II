@@ -6,30 +6,41 @@
   <title>Agendamento de Consulta</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/cabecario.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pop_up.css') }}">
 </head>
 
 <body>
-  <!-- ------------------------------Cabecario---------------------------------------------->
-  <header id="cabecario">
+
+    <header id="cabecario">
     <img src="{{ url_for('static', filename='imagem/logo.png') }}" id="logo" alt="Logo do Hospital">
 
     <div id="login">
       <div id="perfil-usuario">
         <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Ícone do perfil">
+
         <div id="oculto"></div>
-        <div class="links">
-          <a href="{{ url_for('login') }}" id="login-entra">Entrar</a> /
+
+        <div class="links" id="links-login">
+           <a href="{{ url_for('login') }}" id="login-entra">Entrar</a> /
           <a href="{{ url_for('cadastro') }}">Cadastrar-se</a>
         </div>
+
         <ul class="submenu">
-          <li><a href="h-confirmacao.html?origem=modificaPagina" onclick="mudificaPagina()">Consultas marcadas</a></li>
+          <li><a href="h-confirmacao.html?origem=modificaPagina">Consultas marcadas</a></li>
           <li><a href="{{ url_for('altera_cadastro') }}">Alterar Cadastro</a></li>
-          <li><a href="#">Sair</a></li>
+          <li><a href="#" id="botao-sair"  onclick="realizarLogout()">Sair</a></li>
         </ul>
       </div>
     </div>
   </header>
 
+  <div id="pop-up" class="pop-up">
+    <div class="pop-up-conteudo">
+      <h4 id="pop-up-titulo"></h4>
+      <p id="pop-up-mensagem"></p>
+      <button id="pop-up-ok">OK</button>
+    </div>
+  </div>
 
   <div id="texto">
     <h1>Marque facil sua consulta</h1>

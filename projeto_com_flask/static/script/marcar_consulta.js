@@ -93,14 +93,12 @@ function preencherTabela(horariosPorDia, nomeMed, crmMed, endMed) {
                                 data: diaSelecionado + "/" + mesSelecionado + "/" + anoSelecionado,
                                 horario: horarioSelecionado
                             };
-                            alert("ao" + usuario)
                             localStorage.setItem("infoConsulta", JSON.stringify(infoConsulta));
                             window.location.href = "/confirmacao";
                         } else {
-                            alert("ai" + usuario)
-                            window.location.href = "/";
+                            
+                             window.location.href = "/login"; 
                         }
-
                     });
                 }
                 horariosDiv.appendChild(botao);

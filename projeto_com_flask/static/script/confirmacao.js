@@ -1,8 +1,9 @@
 const botaoConfirmar = document.getElementById('botao-confirmar');
-const modal = document.getElementById('modal');
-const modalOk = document.getElementById('modal-ok');
-const modalTitulo = document.getElementById('modal-titulo');
-const modalMensagem = document.getElementById('modal-mensagem');
+const popUp = document.getElementById('pop-up');
+const popUpOk = document.getElementById('pop-up-ok');
+const popUpTitulo = document.getElementById('pop-up-titulo');
+const popUpMensagem = document.getElementById('pop-up-mensagem');
+
 
 const params = new URLSearchParams(window.location.search);
 const origem = params.get('origem');
@@ -47,34 +48,31 @@ if (origem === 'modificaPagina') {
       endereco: infoConsulta.endereco
     };
 
-    fetch("http://127.0.0.1:5000/api/confirma-consulta", {
+    fetch("../autent.json", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dadosUsuario)
     })
       .then(response => {
         if (!response.ok) throw new Error("Erro na requisição");
-        modalTitulo.innerHTML = "Sucesso!";
-        modalMensagem.innerHTML = "Consulta confirmada com sucesso!";
-        modal.style.display = 'flex';
+
+        popUpTitulo.innerHTML = "Sucesso!";
+        popUpMensagem.innerHTML = "Consulta confirmada com sucesso!";
+        popUp.style.display = 'flex';
       })
       .catch(err => {
         console.error(err);
-        modalTitulo.innerHTML = "Erro!";
-        modalMensagem.innerHTML = "Não foi possível confirmar a consulta.";
-        modal.style.display = 'flex';
+        popUpTitulo.innerHTML = "Erro!";
+        popUpMensagem.innerHTML = "Não foi possível confirmar a consulta.";
+        popUp.style.display = 'flex';
       });
   });
 
-  modalOk.addEventListener('click', function () {
-    modal.style.display = 'none';
-    window.location.href = "/";
+  popUpOk.addEventListener('click', function () {
+    popUp.style.display = 'none';
+    window.location.href = "h-index.html";
   });
 }
-
-
-
-
 
 
 

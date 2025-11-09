@@ -7,6 +7,7 @@
     <title>Confirmar Consulta</title>
     <link rel="stylesheet" href="c-cabecario.css">
     <link rel="stylesheet" href="c-confirmacao.css">
+    <link rel="stylesheet" href="sair.css">
 </head>
 
 <body>
@@ -17,19 +18,30 @@
     <div id="login">
       <div id="perfil-usuario">
         <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Ícone do perfil">
+
         <div id="oculto"></div>
-        <div class="links">
+
+        <div class="links" id="links-login">
           <a href="../Login/h-login.html" id="login-entra">Entrar</a> /
           <a href="../Login/h-cadastro.html">Cadastrar-se</a>
         </div>
+
         <ul class="submenu">
           <li><a href="h-confirmacao.html?origem=modificaPagina" onclick="mudificaPagina()">Consultas marcadas</a></li>
           <li><a href="../Login/h-altera-cadastro.html">Alterar Cadastro</a></li>
-          <li><a href="#">Sair</a></li>
+          <li><a href="#" id="botao-sair"  onclick="realizarLogout()">Sair</a></li>
         </ul>
       </div>
     </div>
   </header>
+
+    <div id="pop-up" class="pop-up">
+        <div class="pop-up-conteudo">
+            <h4 id="pop-up-titulo"></h4>
+            <p id="pop-up-mensagem"></p>
+            <button id="pop-up-ok">OK</button>
+        </div>
+    </div>
 
     <div id="texto">
         <h1 id="mudaTexto">Confirme sua Consulta</h1>
@@ -37,16 +49,16 @@
 
     <!-- ----------------------------Confirmação de Consulta---------------------------------->
     <div class="caixa-confirmacao">
-                                               
+
         <div id="esq">
-            <h3>Paciente</h3>  
+            <h3>Paciente</h3>
             <div label-input>
                 <label>Nome:</label>
                 <input type="text" id="nome-pessoa" readonly>
             </div>
             <div label-input>
                 <label>CPF:</label>
-                <input type="text" id="cpf"  readonly>
+                <input type="text" id="cpf" readonly>
             </div>
             <div label-input>
                 <label>Data de Nascimento:</label>
@@ -71,7 +83,7 @@
             <div label-input>
 
                 <label>CRM:</label>
-                <input type="text" id="crm"  readonly>
+                <input type="text" id="crm" readonly>
             </div>
         </div>
 
@@ -88,7 +100,7 @@
             <div id="lado">
                 <div label-input>
                     <label>Horário:</label>
-                    <input type="text" id="horario"  readonly>
+                    <input type="text" id="horario" readonly>
                 </div>
                 <div label-input>
                     <label>Data:</label>
@@ -97,7 +109,7 @@
             </div>
             <div label-input>
                 <label>Endereço:</label>
-                <input type="text" id="endereco"  readonly>
+                <input type="text" id="endereco" readonly>
             </div>
 
         </div>
@@ -107,21 +119,13 @@
             <button id="botao-confirmar">Confirmar</button>
         </div>
     </div>
-    <!-- Modal Personalizado -->
-    <!-- Modal Personalizado -->
-    <div id="modal" class="modal">
-        <div class="modal-conteudo">
-            <h4 id="modal-titulo"></h4>
-            <p id="modal-mensagem"></p>
-            <button id="modal-ok">OK</button>
-        </div>
-    </div>
+
 
     <script src="j-confirmacao.js"></script>
     <script src="j-cookies.js"></script>
 
 
-<!-- <script>
+    <!-- <script>
 document.addEventListener("DOMContentLoaded", function () {
     const paciente = JSON.parse(localStorage.getItem("pacienteLogado"));
 

@@ -3,7 +3,6 @@ const selectHospital = document.getElementById("hospital");
 const selectEspecialista = document.getElementById("especialidade");
 const clicaBotao = document.getElementById("botao");
 
-// Carrega cidades
 fetch("http://127.0.0.1:5000/api/informacoes?informacoes=cidade")
     .then(response => response.json())
     .then(data => {
@@ -16,7 +15,6 @@ fetch("http://127.0.0.1:5000/api/informacoes?informacoes=cidade")
     })
     .catch(err => console.error(err));
 
-// Quando muda a cidade, carrega hospitais
 selectCidade.addEventListener("change", () => {
     fetch("http://127.0.0.1:5000/api/informacoes?informacoes=hospital")
         .then(res => res.json())
@@ -32,7 +30,6 @@ selectCidade.addEventListener("change", () => {
         .catch(err => console.error(err));
 });
 
-// Quando muda o hospital, carrega especialistas
 selectHospital.addEventListener("change", () => {
     fetch("http://127.0.0.1:5000/api/informacoes?informacoes=especialidade")
         .then(res => res.json())

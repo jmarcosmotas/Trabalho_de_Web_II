@@ -7,11 +7,9 @@ def confirmar_consulta(dados):
 
 def cadastra_usuario(dados):
     caminho_arquivo = "txt/usuarios_cadastrados.txt"  
-    with open(caminho_arquivo, "a", encoding="utf-8") as arquivo:
-        arquivo.write(f"{dados}")
+    with open(caminho_arquivo, "a", encoding="utf-8", newline="\n") as arquivo:
+        arquivo.write(f"{dados}\n")
 
-
-import json
 
 def fazer_login(dados):
     print(f"Dados recebidos para login: {dados}")
@@ -33,10 +31,8 @@ def fazer_login(dados):
                     "cpf": usuario["cpf"],
                     "data": usuario["dataNascimento"],
                     "telefone": usuario["telefone"]
-                }
-            
-                return info  
-    
+                }           
+                return info    
     return {}  
 
 
