@@ -12,17 +12,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (usuario && usuario.nome) {
         const primeiroNome = usuario.nome.split(" ")[0];
-        linksDiv.style.display = "none";         
-        botaoSair.style.display = "inline-block"; 
+        linksDiv.style.display = "none";
+        botaoSair.style.display = "inline-block";
         oculto.innerHTML = `Olá <strong>${primeiroNome}</strong>,<br> seja bem-vindo`;
     } else {
-        linksDiv.style.display = "flex";  
+        linksDiv.style.display = "flex";
         botaoSair.style.display = "none";
         oculto.innerHTML = "";
     }
 
-    window.realizarLogout = function() {
+    window.realizarLogout = function () {
         localStorage.removeItem("usuario");
+        sessionStorage.removeItem("agendamento");
+        localStorage.removeItem("infoConsulta");
         popUpTitulo.innerHTML = "Sessão Encerrada!";
         popUpMensagem.innerHTML = "Você foi deslogado com sucesso.";
         popUp.style.display = "flex";

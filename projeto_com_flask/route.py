@@ -20,7 +20,6 @@ def marcar_consulta():
 def confirmacao():
     return render_template('confirmacao.html')
 
-
 @app.route('/login')
 def login():
     return render_template('login.html')
@@ -36,6 +35,10 @@ def altera_senha():
 @app.route('/altera-cadastro')
 def altera_cadastro():
     return render_template('altera_cadastro.html')
+
+@app.route('/consultas-confirmadas')
+def consultas_confirmados():
+    return render_template('consultas_comfirmada.html')
 
 
 @app.route('/api/info', methods=['GET'])
@@ -61,14 +64,13 @@ def api_login():
     dados = request.get_json()
     info_usuario = fazer_login(dados)
     if info_usuario:
-        # cria sessão do usuário
         session['user'] = info_usuario
         return jsonify(info_usuario), 200
     else:
         return jsonify({"error": "CPF ou senha inválidos"}), 401
 
-
 @app.route('/api/informacoes', methods=['GET'])
+
 def api_informacoes():
     info = request.args.get("informacoes")   
     if info == "cidade":
@@ -78,10 +80,8 @@ def api_informacoes():
     elif info == "especialidade":
         return jsonify({"especialista": ["Clínico Geral", "Cardiologia", "Dermatologia"]})
 
-
 def _unauthorized_json():
     return jsonify({"error": "Unauthorized"}), 401
-
 
 def requires_session_auth(f):
     @wraps(f)
@@ -93,11 +93,6 @@ def requires_session_auth(f):
 
 
 def requires_session_or_basic(f):
-    """Aceita autenticação por sessão (cookie) OU por HTTP Basic.
-
-    - Se o cliente já tiver `session['user']`, passa.
-    - Caso contrário, tenta ler o header Authorization Basic e validar via `autenticar`.
-    """
     def check_basic():
         auth = request.headers.get('Authorization')
         if not auth:
@@ -111,17 +106,15 @@ def requires_session_or_basic(f):
                 return False
             decoded = base64.b64decode(creds).decode('utf-8')
             cpf, senha = decoded.split(':', 1)
-            # usa a função que criamos em write.py
             return autenticar(cpf, senha)
         except Exception:
             return False
 
     @wraps(f)
     def wrapped(*args, **kwargs):
-        # primeiro tenta sessão
+       
         if session.get('user'):
             return f(*args, **kwargs)
-        # depois tenta Basic
         if check_basic():
             return f(*args, **kwargs)
         return _unauthorized_json()
@@ -133,12 +126,33 @@ def requires_session_or_basic(f):
 @requires_session_or_basic
 def api_confirma_consulta():
     dados = request.get_json()
-    confirmar_consulta(dados)
-    return jsonify({"status": "ok"}) 
+    confirmacao = confirmar_consulta(dados)
+    if confirmacao:
+        return jsonify({"status": "ok"}), 200
+    else:
+        return jsonify({"error": "A pessoa só pode ter uma consulta por vez"}), 400
 
 
 @app.route('/api/cadastra', methods=['POST'])
 def api_cadastra():
-    dados = request.get_json() 
-    cadastra_usuario(dados) 
-    return jsonify({"status": "ok"}) 
+    dados = request.get_json()  
+    
+    cadastro_confirmado = cadastra_usuario(dados)
+
+    if cadastro_confirmado:
+        return jsonify({"status": "ok"}), 200 
+    else:
+        return jsonify({"error": "Usuário já cadastrado"}), 400
+
+
+@app.route('/api/consultas-comfirmadas', methods=['POST'])
+def api_consultas_confirmados():
+    dados = request.get_json()
+    consulta = consultas_agendadas(dados)
+    if consulta:
+        return jsonify({"status": "ok", **consulta}), 200
+    else:
+        return jsonify({"error": "Usuário não possui nenhuma Consulta Agendada"}), 400
+
+
+

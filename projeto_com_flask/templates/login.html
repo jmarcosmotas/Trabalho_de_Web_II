@@ -21,10 +21,10 @@
         </div> 
         <div id="botao-cadasto">
             <button type="submit" id="botao" onclick="login(event)">Entrar</button>
-            <input type="checkbox" id="lembrar">Lembrar meu login
         </div>
         <p><a href="{{url_for('cadastro')}}" id="link">Cadastra-se</a></p>   
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script src="{{ url_for('static', filename='script/fetchAPIs.js') }}"></script>
 </body>
 </html>

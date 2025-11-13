@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <!--------------------------------Cabecario---------------------------------------------->
+<!--------------------------------Cabecario---------------------------------------------->
 
     <header id="cabecario">
     <img src="{{ url_for('static', filename='imagem/logo.png') }}" id="logo" alt="Logo do Hospital">
@@ -28,7 +28,7 @@
         </div>
 
         <ul class="submenu">
-          <li><a href="h-confirmacao.html?origem=modificaPagina">Consultas marcadas</a></li>
+          <li><a href="{{ url_for('consultas_confirmados')}}">Consultas marcadas</a></li>
           <li><a href="{{ url_for('altera_cadastro') }}">Alterar Cadastro</a></li>
           <li><a href="#" id="botao-sair"  onclick="realizarLogout()">Sair</a></li>
         </ul>

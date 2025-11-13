@@ -7,29 +7,32 @@ const endMedico = document.getElementById("end-Medico")
 const ths = document.querySelectorAll("thead th");
 const mesAno = document.getElementById("mes-ano");
 
-function requisicao() {
-    fetch("http://127.0.0.1:5000/api/info")
-        .then(response => response.json())
-        .then(data => {
-            nomeMedico.innerHTML = `DR. ${data.medico}`;
-            espMedico.innerHTML = `<strong>Especialidade: </strong>`;
-            crmMedico.innerHTML = `CRM: ${data.CRM}`;
-            textoMedico.innerHTML = `${data.texto}`;
-            endMedico.innerHTML = `<strong>Endereço da Consulta:</strong> ${data.endereco}`;
+async function requisicao() {
+    try {
+        const response = await fetch("http://127.0.0.1:5000/api/info");
+        const data = await response.json();
 
-            const horariosPorDia = [
-                ["Dom", ...(data.dom || [])],
-                ["Seg", ...(data.seg || [])],
-                ["Ter", ...(data.ter || [])],
-                ["Qua", ...(data.qua || [])],
-                ["Qui", ...(data.qui || [])],
-                ["Sex", ...(data.sex || [])],
-                ["Sáb", ...(data.sab || [])]
-            ];
+        nomeMedico.innerHTML = `DR. ${data.medico}`;
+        espMedico.innerHTML = `<strong>Especialidade: </strong>`;
+        crmMedico.innerHTML = `CRM: ${data.CRM}`;
+        textoMedico.innerHTML = `${data.texto}`;
+        endMedico.innerHTML = `<strong>Endereço da Consulta:</strong> ${data.endereco}`;
 
-            preencherTabela(horariosPorDia, data.medico, data.CRM, data.endereco);
-        })
-        .catch(err => console.error(err));
+        const horariosPorDia = [
+            ["Dom", ...(data.dom || [])],
+            ["Seg", ...(data.seg || [])],
+            ["Ter", ...(data.ter || [])],
+            ["Qua", ...(data.qua || [])],
+            ["Qui", ...(data.qui || [])],
+            ["Sex", ...(data.sex || [])],
+            ["Sáb", ...(data.sab || [])]
+        ];
+
+        preencherTabela(horariosPorDia, data.medico, data.CRM, data.endereco);
+
+    } catch (err) {
+        console.error("Erro na requisição:", err);
+    }
 }
 
 function preencherTabela(horariosPorDia, nomeMed, crmMed, endMed) {

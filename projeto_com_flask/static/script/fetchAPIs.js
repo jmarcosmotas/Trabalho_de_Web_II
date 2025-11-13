@@ -1,120 +1,152 @@
-function alteraSenha(){
-    const form = document.getElementById("caixa-formulario");
-    const dadosUsuario = Object.fromEntries(new FormData(form));
-    console.log(dadosUsuario);
-
-    fetch("/altera-senha", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dadosUsuario)
-    })
-    .then(response => {
-        if (response.ok) {
-            window.location.href="/login";
-        } else {
-            throw new Error('Erro na requisição: ' + response.status);
-        }
-    })
-    .catch(err => {
-        console.error(err);
-    });
-}
-
-function verificaEmail(event){
+function cadastro(event) {
     event.preventDefault();
     const form = document.getElementById("caixa-formulario");
     const dadosUsuario = Object.fromEntries(new FormData(form));
-    console.log(dadosUsuario);
+    const erroDiv = document.getElementById("erro");
 
-    fetch("/verifica-email",{
+    if (dadosUsuario.senha !== dadosUsuario.confirmaSenha) {
+        erroDiv.innerText = "As senhas não coincidem!";
+        return;
+    }
+    dadosUsuario.senha = CryptoJS.SHA256(dadosUsuario.senha).toString();
+    delete dadosUsuario.confirmaSenha;
+    fetch("http://127.0.0.1:5000/api/cadastra", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dadosUsuario)
     })
-    .then(response => {
-        if (response.ok) {
-            window.location.href="{/altera-cadastro";
-        } else {
-            throw new Error('Erro na requisição: ' + response.status);
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        document.getElementById("erro").innerText = "E-mail não possui cadastro";
-    });
-}
-
-function cadastro(event){
-    event.preventDefault();
-    const form = document.getElementById("caixa-formulario");
-    const dadosUsuario = Object.fromEntries(new FormData(form));
-    
-    console.log(dadosUsuario);    
-
-    fetch("http://127.0.0.1:5000/api/cadastra",{
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dadosUsuario)
-    })
-    .then(response => {
-        if (response.ok) {
-            window.location.href="/login"
-        } else {
-            throw new Error('Erro na requisição: ' + response.status);
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        document.getElementById("erro").innerText = "Ocorreu um erro no cadastro";
-    });
-
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "/login";
+            } else {              
+                return response.json().then(erroJson => {
+                    document.getElementById("erro").innerText = erroJson.error;
+                    console.log("Mensagem do servidor:", erroJson.error);
+                });
+            }
+        })
+        .catch(err => {
+            console.error("Erro no fetch:", err);
+        });
 }
 
 function login(event) {
     event.preventDefault();
     const form = document.getElementById("caixa-formulario");
     const dadosUsuario = Object.fromEntries(new FormData(form));
-    console.log(dadosUsuario);
+
+    dadosUsuario.senha = CryptoJS.SHA256(dadosUsuario.senha).toString();
 
     fetch("http://127.0.0.1:5000/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dadosUsuario)
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erro na requisição: ' + response.statusText);
-        }
-        return response.json();
-    })
-    .then(data => {
-        localStorage.setItem("usuario", JSON.stringify(data));
-         window.location.href = "/";
-    })
-    .catch(err => {
-        console.error(err);
-        document.getElementById("erro").innerText = "E-mail ou Senha Invalido";
-    });
+        .then(async response => {
+            const data = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem("usuario", JSON.stringify(data));
+                window.location.href = "/"; 
+            } else {
+                document.getElementById("erro").innerText = data.error || "Erro desconhecido.";
+                console.log("Mensagem do servidor:", data.error);
+            }
+        })
+        .catch(err => {
+            console.error("Erro de rede:", err);
+            document.getElementById("erro").innerText = "Falha na conexão com o servidor.";
+        });
 }
 
-function alteraCadastro(){
-    const form = document.getElementById("caixa-formulario");
-    const dadosUsuario = Object.fromEntries(new FormData(form));
-    console.log(dadosUsuario);
+function alteraSenha() {
+    window.location.href = "/login"
+//     const form = document.getElementById("caixa-formulario");
+//     const dadosUsuario = Object.fromEntries(new FormData(form));
+//     console.log(dadosUsuario);
 
-    fetch("/altera-cadastro", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dadosUsuario)
-    })
-    .then(response => {
-        if (response.ok) {
-            window.location.href = "/}";
-        } else {
-            throw new Error('Erro na requisição: ' + response.status);
-        }
-    })
-    .catch(err => {
-        console.error(err);
-    });
+//     fetch("/altera-senha", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(dadosUsuario)
+//     })
+//         .then(response => {
+//             if (response.ok) {
+//                 window.location.href = "/login";
+//             } else {
+//                 throw new Error('Erro na requisição: ' + response.status);
+//             }
+//         })
+//         .catch(err => {
+//             console.error(err);
+//         });
+}
+
+function verificaEmail(event) {
+     window.location.href = "/altera-senha"
+    // event.preventDefault();
+    // const form = document.getElementById("caixa-formulario");
+    // const dadosUsuario = Object.fromEntries(new FormData(form));
+
+    // fetch("/verifica-email", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(dadosUsuario)
+    // })
+    //     .then(response => {
+    //         if (response.ok) {
+    //             window.location.href = "{/altera-cadastro";
+    //         } else {
+    //             throw new Error('Erro na requisição: ' + response.status);
+    //         }
+    //     })
+    //     .catch(err => {
+    //         console.error(err);
+    //         document.getElementById("erro").innerText = err.message;
+    //     });
+}
+
+
+// function alteraCadastro() {
+//     window.location.href = "/home"
+//     const form = document.getElementById("caixa-formulario");
+//     const dadosUsuario = Object.fromEntries(new FormData(form));
+//     console.log(dadosUsuario);
+
+//     fetch("/altera-cadastro", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(dadosUsuario)
+//     })
+//         .then(response => {
+//             if (response.ok) {
+//                 window.location.href = "/}";
+//             } else {
+//                 throw new Error('Erro na requisição: ' + response.status);
+//             }
+//         })
+//         .catch(err => {
+//             console.error(err);
+//         });
+// }
+
+function alteraCadastro() {
+    const form = document.getElementById("caixa-formulario");
+    const senha = document.getElementById("senha").value.trim();
+    const confirmaSenha = document.getElementById("confirmaSenha").value.trim();
+
+    // Verifica se os campos estão preenchidos
+    if (!senha || !confirmaSenha) {
+        alert("Por favor, preencha todos os campos!");
+        return; // Para a execução
+    }
+
+    // Verifica se as senhas são iguais
+    if (senha !== confirmaSenha) {
+        alert("As senhas não coincidem!");
+        return; // Para a execução
+    }
+
+    // Se chegou aqui, os campos estão corretos -> muda de página
+    window.location.href = "/home";
 }

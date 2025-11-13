@@ -1,31 +1,49 @@
 import json
 
 def confirmar_consulta(dados):
-    caminho_arquivo = "txt/consultas.txt"  
+    caminho_arquivo = "txt/consultas.txt"
+
+    with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
+        for linha in arquivo:
+            linha_corrigida = linha.strip()
+            if not linha_corrigida:
+                continue
+            usuario = json.loads(linha_corrigida)              
+            if usuario.get("cpf") == dados.get("cpf"):
+                return False
+
     with open(caminho_arquivo, "a", encoding="utf-8") as arquivo:
-        arquivo.write(f"{dados}") 
+        arquivo.write(json.dumps(dados, ensure_ascii=False) + "\n")
+    return True
 
 def cadastra_usuario(dados):
-    caminho_arquivo = "txt/usuarios_cadastrados.txt"  
-    with open(caminho_arquivo, "a", encoding="utf-8", newline="\n") as arquivo:
-        arquivo.write(f"{dados}\n")
+    caminho_arquivo = "txt/usuarios_cadastrados.txt"
+
+    with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
+        for i, linha in enumerate(arquivo):
+            linha_corrigida = linha.strip()
+            if not linha_corrigida:
+                continue
+            usuario = json.loads(linha_corrigida) 
+            if usuario.get("cpf") == dados.get("cpf"):
+                print(f"CPF {dados['cpf']} já cadastrado!")
+                return False  
+
+    with open(caminho_arquivo, "a", encoding="utf-8") as arquivo:
+        arquivo.write(json.dumps(dados, ensure_ascii=False) + "\n")
+        print(f"Usuário {dados['cpf']} cadastrado com sucesso")
+
+    return True
 
 
-def fazer_login(dados):
-    print(f"Dados recebidos para login: {dados}")
-    
+def fazer_login(dados):  
     caminho_arquivo = "txt/usuarios_cadastrados.txt" 
     
     with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
         for linha in arquivo.readlines():
-            print(f"Linha lida do arquivo: {linha.strip()}")
-
-            linha_corrigida = linha.replace("'", '"')
-
-            usuario = json.loads(linha_corrigida) 
+            usuario = json.loads(linha) 
             print(f"Usuário convertido: {usuario}")           
             if usuario["cpf"] == dados["cpf"] and usuario["senha"] == dados["senha"]:
-                print(f"Login bem-sucedido para o CPF: {usuario['cpf']}")
                 info = {
                     "nome": usuario["nome"],
                     "cpf": usuario["cpf"],
@@ -36,12 +54,22 @@ def fazer_login(dados):
     return {}  
 
 
-def autenticar(cpf, senha):
-    """Retorna True se as credenciais (cpf, senha) forem válidas, False caso contrário.
+def consultas_agendadas(dados):
+    caminho_arquivo = "txt/consultas.txt"
 
-    Implementado reutilizando `fazer_login` que já carrega e valida o usuário
-    a partir do arquivo `txt/usuarios_cadastrados.txt`.
-    """
+    with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
+        for linha in arquivo:
+            linha_corrigida = linha.strip()
+            if not linha_corrigida:
+                continue
+            usuario = json.loads(linha_corrigida)              
+            if usuario.get("cpf") == dados.get("cpf"):
+                return usuario
+    return False
+
+
+
+def autenticar(cpf, senha):
     info = fazer_login({"cpf": cpf, "senha": senha})
     return bool(info)
 

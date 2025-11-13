@@ -11,7 +11,7 @@
 
 <body>
 
-    <header id="cabecario">
+  <header id="cabecario">
     <img src="{{ url_for('static', filename='imagem/logo.png') }}" id="logo" alt="Logo do Hospital">
 
     <div id="login">
@@ -21,14 +21,14 @@
         <div id="oculto"></div>
 
         <div class="links" id="links-login">
-           <a href="{{ url_for('login') }}" id="login-entra">Entrar</a> /
+          <a href="{{ url_for('login') }}" id="login-entra">Entrar</a> /
           <a href="{{ url_for('cadastro') }}">Cadastrar-se</a>
         </div>
 
         <ul class="submenu">
-          <li><a href="h-confirmacao.html?origem=modificaPagina">Consultas marcadas</a></li>
+          <li><a href="{{ url_for('consultas_confirmados')}}">Consultas marcadas</a></li>
           <li><a href="{{ url_for('altera_cadastro') }}">Alterar Cadastro</a></li>
-          <li><a href="#" id="botao-sair"  onclick="realizarLogout()">Sair</a></li>
+          <li><a href="#" id="botao-sair" onclick="realizarLogout()">Sair</a></li>
         </ul>
       </div>
     </div>
@@ -74,6 +74,11 @@
   </div>
   <script src="{{ url_for('static', filename='script/cookies.js') }}"></script>
   <script src="{{ url_for('static', filename='script/index.js') }}"></script>
+  <script>
+    const origem = "{{ origem }}";
+    if (origem === "modificaPagina") {
+    }
+  </script>
 </body>
 
 </html>

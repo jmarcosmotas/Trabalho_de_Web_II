@@ -27,7 +27,6 @@
         </div>
 
         <ul class="submenu">
-          <li><a href="{{ url_for('consultas_confirmados')}}">Consultas marcadas</a></li>
           <li><a href="{{ url_for('altera_cadastro') }}">Alterar Cadastro</a></li>
           <li><a href="#" id="botao-sair"  onclick="realizarLogout()">Sair</a></li>
         </ul>
@@ -115,15 +114,12 @@
         </div>
 
         <div id="div-botao">
-            <a href="{{ url_for('marcar_consulta') }}"><button id="botao">Voltar</button></a>
-            <button id="botao-confirmar">Confirmar</button>
+            <a href="{{ url_for('home') }}"><button id="botao">Voltar</button></a>
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='script/confirmacao.js') }}"></script>
     <script src="{{ url_for('static', filename='script/cookies.js') }}"></script>
-    
-
+    <script src="{{ url_for('static', filename='script/consultas_comfirmada.js') }}"></script>
 </body>
 
 </html>

@@ -51,16 +51,17 @@
 
     <div class="caixa-digita">
       <label for="confirmaSenha">Confirmar Senha:</label>
-      <input type="password" id="confirmaSenha" placeholder="Confirme sua senha" required>
+      <input type="password" id="confirmaSenha"name="confirmaSenha" placeholder="Confirme sua senha" required>
     </div>
 
     <div id="botao-cadasto">
-      <button type="button" id="botao" onclick="cadastro(event)">Cadastrar</button>
+      <button type="button" id="botao"  onclick="cadastro(event)">Cadastrar</button>
       <p>
         Já tem conta? <a href="{{ url_for('login') }}" id="link">Entrar</a>
       </p>
     </div>
   </form>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <script src="{{ url_for('static', filename='script/fetchAPIs.js') }}"></script>
 
 </body>

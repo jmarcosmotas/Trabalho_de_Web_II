@@ -20,8 +20,8 @@
             </div>
 
             <div class="botao-cadastro">
-                <a href="{{url_for('login')}}"><button type="submit" id="botao" onclick="alteraSenha()">Redefinir Senha</button></a>
-                <p><a href="{{url_for('altera_senha')}}" id="link">Voltar</a></p> 
+                <button type="button" id="botao" onclick="alteraSenha()">Redefinir Senha</button>
+                <p><a href="{{url_for('valida_email')}}" id="link">Voltar</a></p> 
             </div>
         </form>
         <script src="{{ url_for('static', filename='script/fetchAPIs.js') }}"></script>
