@@ -68,11 +68,12 @@ function cadastro(event){
     });
 }
 
-function login(event) {
+function login(event){
     event.preventDefault();
     const form = document.getElementById("caixa-formulario");
     const dadosUsuario = Object.fromEntries(new FormData(form));
     console.log(dadosUsuario);
+    if dadosUsuario.
 
     fetch("../autentica.json")
     // fetch("../autentica.json", {
