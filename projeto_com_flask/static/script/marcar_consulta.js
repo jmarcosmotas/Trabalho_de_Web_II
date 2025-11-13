@@ -88,7 +88,6 @@ function preencherTabela(horariosPorDia, nomeMed, crmMed, endMed) {
                             const mesSelecionado = e.target.dataset.mes;
                             const anoSelecionado = e.target.dataset.ano;
                             const horarioSelecionado = e.target.dataset.horario;
-                            alert(usuario)
                             const infoConsulta = {
                                 medico: nomeMed,
                                 crm: crmMed,

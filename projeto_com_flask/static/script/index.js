@@ -58,7 +58,6 @@ clicaBotao.addEventListener("click", (event) => {
     }
 
     sessionStorage.setItem("agendamento", JSON.stringify({ cidade, hospital, especialista }));
-    alert(`Cidade: ${cidade}\nHospital: ${hospital}\nEspecialidade: ${especialista}`);
 
     window.location.href = "/marca-consulta";
 });
