@@ -33,12 +33,12 @@ function cadastro(event) {
 window.addEventListener("DOMContentLoaded", () => {
     const cpfSalvo = localStorage.getItem("cpf");
 
-    if (cpfSalvo) {
-        const campoCpf = document.getElementById("cpf");
-        const lembrarCheck = document.getElementById("lembrar");
+    const campoCpf = document.getElementById("cpf");
+    const lembrarCheck = document.getElementById("lembrar");
 
-        if (campoCpf) campoCpf.value = cpfSalvo;
-        if (lembrarCheck) lembrarCheck.checked = true;
+    if (cpfSalvo && campoCpf && lembrarCheck) {
+        campoCpf.value = cpfSalvo;
+        lembrarCheck.checked = true;
     }
 });
 
@@ -46,6 +46,8 @@ function login(event) {
     event.preventDefault();
     const form = document.getElementById("caixa-formulario");
     const dadosUsuario = Object.fromEntries(new FormData(form));
+    const lembrar = document.getElementById("lembrar")?.checked;
+    const erroDiv = document.getElementById("erro");
 
     dadosUsuario.senha = CryptoJS.SHA256(dadosUsuario.senha).toString();
 
@@ -59,6 +61,12 @@ function login(event) {
 
             if (response.ok) {
                 localStorage.setItem("usuario", JSON.stringify(data));
+
+                if (lembrar) {
+                    localStorage.setItem("cpf", dadosUsuario.cpf)
+                } else { 
+                    localStorage.removeItem("cpf");
+                }
                 window.location.href = "/"; 
             } else {
                 document.getElementById("erro").innerText = data.error || "Erro desconhecido.";
@@ -161,4 +169,9 @@ function alteraCadastro() {
 
     // Se chegou aqui, os campos estão corretos -> muda de página
     window.location.href = "/home";
+}
+
+const form  = document.getElementById("caixa-formulario");
+if (form) {
+    form.addEventListener("submit", login)
 }
