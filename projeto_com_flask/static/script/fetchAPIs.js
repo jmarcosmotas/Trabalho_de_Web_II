@@ -30,6 +30,18 @@ function cadastro(event) {
         });
 }
 
+window.addEventListener("DOMContentLoaded", () => {
+    const cpfSalvo = localStorage.getItem("cpf");
+
+    if (cpfSalvo) {
+        const campoCpf = document.getElementById("cpf");
+        const lembrarCheck = document.getElementById("lembrar");
+
+        if (campoCpf) campoCpf.value = cpfSalvo;
+        if (lembrarCheck) lembrarCheck.checked = true;
+    }
+});
+
 function login(event) {
     event.preventDefault();
     const form = document.getElementById("caixa-formulario");
