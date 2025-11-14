@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("caixa-formulario");
 
-    if (window.location.pathname.includes("login.html")) {
+    if (window.location.pathname.includes("h-login.html")) {
         const cpfInput = document.getElementById("cpf");
         const senhaInput = document.getElementById("senha");
         const lembrarChk = document.getElementById("lembrar");
