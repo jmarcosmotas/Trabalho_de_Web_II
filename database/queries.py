@@ -1,3 +1,4 @@
+#  Esse arquivo e criado as consultas do Banco de Dados
 from .models import db, Cidade, Hospital, Especialidade, Medico
 from .init import db
 

@@ -1,4 +1,4 @@
-# Arquivo model.py
+# Esse arquivo crias as tabelas do Banco de Dados
 from .init import db
 # ---------------------- Usuario ----------------------
 class Usuario(db.Model):
