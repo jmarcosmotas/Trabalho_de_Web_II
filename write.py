@@ -67,8 +67,6 @@ def consultas_agendadas(dados):
                 return usuario
     return False
 
-
-
 def autenticar(cpf, senha):
     info = fazer_login({"cpf": cpf, "senha": senha})
     return bool(info)

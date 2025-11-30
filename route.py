@@ -1,4 +1,5 @@
 from flask import render_template, request, jsonify, Response, session
+from database.queries import *
 from serve import app
 from write import *
 import base64
@@ -43,20 +44,28 @@ def consultas_confirmados():
 
 @app.route('/api/info', methods=['GET'])
 def api_info():
-    info = {
-        "medico":"Dr. Fulano de Tal",
-        "CRM": "99999",
-        "endereco":"Rua Projetada Nº 000",
-        "texto":"Sou Dr. Fulano de Tal, clínico geral formado em Medicina pela Universidade Federal UF no ano de 2025. Atuo com foco na prevenção, tratamento e orientação à saúde, buscando sempre o bem-estar físico e emocional de cada paciente. Atualmente, realizo atendimentos no Hospital São Lucas, onde ofereço consultas voltadas à avaliação geral de saúde.",
-        "seg":["08:00", "09:00", "10:00", "11:00"],
-        "ter":["08:00", "09:00", "10:00"],
-        "qua":["08:00", "09:00", "11:00", "15:00"],
-        "qui":[],
-        "sex":["08:00", "14:00"],
-        "sab":[],
-        "dom":["08:00", "09:00", "10:00"]
-    }
-    return jsonify(info)
+    especialidade_id = request.args.get("especialidade")
+    hospital_id = request.args.get("hospital")
+    especialidade, medico, hospital = informacoes_medicas(especialidade_id, hospital_id)
+    if not medico or not especialidade or not hospital:
+        return jsonify({"erro": "Dados não encontrados"}), 404
+    informacoes = {
+        "medico": medico.nome,
+        "CRM": medico.crm,
+        "especialidade": especialidade.especialidade,
+        "endereco": hospital.endereco,
+        "texto": medico.texto,
+        "seg": ["08:00", "09:00", "10:00", "11:00"],
+        "ter": ["08:00", "09:00", "10:00"],
+        "qua": ["08:00", "09:00", "11:00", "15:00"],
+        "qui": [],
+        "sex": ["08:00", "14:00"],
+        "sab": [],
+        "dom": ["08:00", "09:00", "10:00"]
+    }   
+    return jsonify(informacoes)
+
+    
 
 
 @app.route('/api/login', methods=['POST'])
@@ -72,13 +81,20 @@ def api_login():
 @app.route('/api/informacoes', methods=['GET'])
 
 def api_informacoes():
-    info = request.args.get("informacoes")   
+    info = request.args.get("informacoes") 
+      
     if info == "cidade":
-        return jsonify({"cidade": ["Picos", "Oeiras", "Teresina"]})
+        list_cid, id_cid = listar_cidades()
+        return jsonify({"cidade": list_cid, "id": id_cid})
     elif info == "hospital":
-        return jsonify({"hospital": ["Hospital Regional", "Hosp. Reg. Justino Luz", "UPA 24h"]})
+        cidade_id = request.args.get("cidade_id")
+        list_hos, id_hos = busca_hospital(cidade_id)
+        return jsonify({"hospital": list_hos, "id": id_hos})
     elif info == "especialidade":
-        return jsonify({"especialista": ["Clínico Geral", "Cardiologia", "Dermatologia"]})
+        hospital_id = request.args.get("hospital_id")
+        list_esp, id_esp = busca_especialista(hospital_id)
+
+        return jsonify({"especialidade": list_esp, "id": id_esp})
 
 def _unauthorized_json():
     return jsonify({"error": "Unauthorized"}), 401

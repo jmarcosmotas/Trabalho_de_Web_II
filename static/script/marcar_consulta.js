@@ -7,29 +7,38 @@ const endMedico = document.getElementById("end-Medico")
 const ths = document.querySelectorAll("thead th");
 const mesAno = document.getElementById("mes-ano");
 
-function requisicao() {
-    fetch("../medico.json")
-        .then(response => response.json())
-        .then(data => {
-            nomeMedico.innerHTML = `DR. ${data.medico}`;
-            espMedico.innerHTML = `<strong>Especialidade: </strong>`;
-            crmMedico.innerHTML = `CRM: ${data.CRM}`;
-            textoMedico.innerHTML = `${data.texto}`;
-            endMedico.innerHTML = `<strong>Endereço da Consulta:</strong> ${data.endereco}`;
 
-            const horariosPorDia = [
-                ["Dom", ...(data.dom || [])],
-                ["Seg", ...(data.seg || [])],
-                ["Ter", ...(data.ter || [])],
-                ["Qua", ...(data.qua || [])],
-                ["Qui", ...(data.qui || [])],
-                ["Sex", ...(data.sex || [])],
-                ["Sáb", ...(data.sab || [])]
-            ];
 
-            preencherTabela(horariosPorDia, data.medico, data.CRM, data.endereco);
-        })
-        .catch(err => console.error(err));
+const agendamentoId = JSON.parse(sessionStorage.getItem("agendamento"));
+console.log(agendamentoId.especialista); 
+console.log(agendamentoId);
+async function requisicao() {
+    try {
+        const response = await fetch(`http://127.0.0.1:5000/api/info?hospital=${agendamentoId.hospital}&especialidade=${agendamentoId.especialista}`);
+
+        const data = await response.json();
+        console.log(data)
+        nomeMedico.innerHTML = `DR. ${data.medico}`;
+        espMedico.innerHTML = `<strong>Especialidade: </strong> ${data.especialidade}`;
+        crmMedico.innerHTML = `CRM: ${data.CRM}`;
+        textoMedico.innerHTML = `${data.texto}`;
+        endMedico.innerHTML = `<strong>Endereço da Consulta:</strong> ${data.endereco}`;
+
+        const horariosPorDia = [
+            ["Dom", ...(data.dom || [])],
+            ["Seg", ...(data.seg || [])],
+            ["Ter", ...(data.ter || [])],
+            ["Qua", ...(data.qua || [])],
+            ["Qui", ...(data.qui || [])],
+            ["Sex", ...(data.sex || [])],
+            ["Sáb", ...(data.sab || [])]
+        ];
+
+        preencherTabela(horariosPorDia, data.medico, data.CRM, data.endereco);
+
+    } catch (err) {
+        console.error("Erro na requisição:", err);
+    }
 }
 
 function preencherTabela(horariosPorDia, nomeMed, crmMed, endMed) {
@@ -79,6 +88,7 @@ function preencherTabela(horariosPorDia, nomeMed, crmMed, endMed) {
 
                     botao.addEventListener("click", (e) => {
                         const usuario = localStorage.getItem("usuario");
+
                         if (usuario) {
                             const diaSelecionado = e.target.dataset.dia;
                             const mesSelecionado = e.target.dataset.mes;
@@ -91,16 +101,14 @@ function preencherTabela(horariosPorDia, nomeMed, crmMed, endMed) {
                                 data: diaSelecionado + "/" + mesSelecionado + "/" + anoSelecionado,
                                 horario: horarioSelecionado
                             };
-                            alert(JSON.stringify(infoConsulta));
                             localStorage.setItem("infoConsulta", JSON.stringify(infoConsulta));
-                            window.location.href = "h-confirmacao.html";
-                        }else{
-                            window.location.href = "h-login.html";
+                            window.location.href = "/confirmacao";
+                        } else {
+                            
+                             window.location.href = "/login"; 
                         }
-
                     });
                 }
-
                 horariosDiv.appendChild(botao);
             });
         }
