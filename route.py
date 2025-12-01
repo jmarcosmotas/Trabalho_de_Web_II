@@ -46,7 +46,7 @@ def consultas_confirmados():
 def api_info():
     especialidade_id = request.args.get("especialidade")
     hospital_id = request.args.get("hospital")
-    especialidade, medico, hospital = informacoes_medicas(especialidade_id, hospital_id)
+    especialidade, medico, hospital, horario_semana = informacoes_medicas(especialidade_id, hospital_id)
     if not medico or not especialidade or not hospital:
         return jsonify({"erro": "Dados não encontrados"}), 404
     informacoes = {
@@ -55,14 +55,15 @@ def api_info():
         "especialidade": especialidade.especialidade,
         "endereco": hospital.endereco,
         "texto": medico.texto,
-        "seg": ["08:00", "09:00", "10:00", "11:00"],
-        "ter": ["08:00", "09:00", "10:00"],
-        "qua": ["08:00", "09:00", "11:00", "15:00"],
-        "qui": [],
-        "sex": ["08:00", "14:00"],
-        "sab": [],
-        "dom": ["08:00", "09:00", "10:00"]
+        "seg": horario_semana.segunda.split(",") if horario_semana.segunda else [],
+        "ter": horario_semana.terca.split(",") if horario_semana.terca else [],
+        "qua": horario_semana.quarta.split(",") if horario_semana.quarta else [],
+        "qui": horario_semana.quinta.split(",") if horario_semana.quinta else [],
+        "sex": horario_semana.sexta.split(",") if horario_semana.sexta else [],
+        "sab": horario_semana.sabado.split(",") if horario_semana.sabado else [],
+        "dom": horario_semana.domingo.split(",") if horario_semana.domingo else [],
     }   
+    print(informacoes)
     return jsonify(informacoes)
 
     

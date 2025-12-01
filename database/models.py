@@ -51,21 +51,20 @@ class Medico(db.Model):
 
 
 # ---------------------- Semana ----------------------
-class Semana(db.Model):
-    __tablename__ = "semana"
-    
-    id = db.Column(db.Integer, primary_key=True)
+class HorarioSemana(db.Model):
+    __tablename__ = "horario_da_semana"
+
+    id = db.Column(db.Integer, primary_key=True)  
     medico_fk = db.Column(db.String(6), db.ForeignKey("medico.crm"), nullable=False)
-    dia_semana = db.Column(db.String(10), nullable=False)
+    segunda = db.Column(db.String(50), nullable=False)
+    terca = db.Column(db.String(50), nullable=False)
+    quarta = db.Column(db.String(50), nullable=False)
+    quinta = db.Column(db.String(50), nullable=False)
+    sexta = db.Column(db.String(50), nullable=False)
+    sabado = db.Column(db.String(50), nullable=False)
+    domingo = db.Column(db.String(50), nullable=False) 
 
 
-# ---------------------- Horario ----------------------
-class Horario(db.Model):
-    __tablename__ = "horario"
-    
-    id = db.Column(db.Integer, primary_key=True)
-    semana_fk = db.Column(db.Integer, db.ForeignKey("semana.id"), nullable=False)
-    horario = db.Column(db.String(5), nullable=False)
 
 
 # ---------------------- Consulta ----------------------

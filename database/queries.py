@@ -1,5 +1,5 @@
 #  Esse arquivo e criado as consultas do Banco de Dados
-from .models import db, Cidade, Hospital, Especialidade, Medico
+from .models import db, Cidade, Hospital, Especialidade, Medico, HorarioSemana
 from .init import db
 
 def listar_cidades():
@@ -25,6 +25,7 @@ def informacoes_medicas(especialista_id,hospital_id):
     especialista = Especialidade.query.get(especialista_id)
     medico = Medico.query.filter_by(especialidade_fk = especialista_id).first()
     hospital = Hospital.query.get(hospital_id)
-    return especialista, medico, hospital
+    horario_da_semana = HorarioSemana.query.filter_by(medico_fk=medico.crm).first()
+    return especialista, medico, hospital, horario_da_semana
 
 
