@@ -1,5 +1,5 @@
 # arquivo Seed.py
-from .models import db, Cidade, Hospital, Especialidade, Medico, HorarioSemana
+from .models import Cidade, Hospital, Especialidade, Medico, HorarioSemana
 from .init import db
 
 def preencher_table():
