@@ -56,19 +56,30 @@ selectHospital.addEventListener("change", () => {
 clicaBotao.addEventListener("click", (event) => {
     event.preventDefault();
 
-    const cidade = selectCidade.value;
-    const hospital = selectHospital.value;
-    const especialista = selectEspecialista.value;
+    const cidadeId = selectCidade.value;
+    const hospitalId = selectHospital.value;
+    const especialistaId = selectEspecialista.value;
 
-    if (!cidade || !hospital || !especialista) {
+    if (!cidadeId || !hospitalId || !especialistaId) {
         alert("Selecione todos os campos antes de continuar!");
         return;
     }
 
-    sessionStorage.setItem("agendamento", JSON.stringify({ cidade, hospital, especialista }));
-   
-    const agendamento = JSON.parse(sessionStorage.getItem("agendamento"));
-    alert(`Agendamento armazenado:\nCidade: ${agendamento.cidade}\nHospital: ${agendamento.hospital}\nEspecialista: ${agendamento.especialista}`);
+    const cidadeNome = selectCidade.options[selectCidade.selectedIndex].text;
+    const hospitalNome = selectHospital.options[selectHospital.selectedIndex].text;
+    const especialistaNome = selectEspecialista.options[selectEspecialista.selectedIndex].text;
+
+    sessionStorage.setItem("agendamento", JSON.stringify({
+        cidadeId: cidadeId,
+        cidadeNome: cidadeNome,
+
+        hospitalId: hospitalId,
+        hospitalNome: hospitalNome,
+
+        especialistaId: especialistaId,
+        especialistaNome: especialistaNome
+    }));
 
     window.location.href = "/marca-consulta";
 });
+

@@ -10,6 +10,7 @@ function cadastro(event) {
     }
     dadosUsuario.senha = CryptoJS.SHA256(dadosUsuario.senha).toString();
     delete dadosUsuario.confirmaSenha;
+    console.log(dadosUsuario)
     fetch("http://127.0.0.1:5000/api/cadastra", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -17,6 +18,7 @@ function cadastro(event) {
     })
         .then(response => {
             if (response.ok) {
+                
                 window.location.href = "/login";
             } else {              
                 return response.json().then(erroJson => {
@@ -42,7 +44,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-function login(event) {
+function login(event){
     event.preventDefault();
     const form = document.getElementById("caixa-formulario");
     const dadosUsuario = Object.fromEntries(new FormData(form));
@@ -154,20 +156,14 @@ function alteraCadastro() {
     const form = document.getElementById("caixa-formulario");
     const senha = document.getElementById("senha").value.trim();
     const confirmaSenha = document.getElementById("confirmaSenha").value.trim();
-
-    // Verifica se os campos estão preenchidos
     if (!senha || !confirmaSenha) {
         alert("Por favor, preencha todos os campos!");
-        return; // Para a execução
+        return;
     }
-
-    // Verifica se as senhas são iguais
     if (senha !== confirmaSenha) {
         alert("As senhas não coincidem!");
-        return; // Para a execução
+        return; 
     }
-
-    // Se chegou aqui, os campos estão corretos -> muda de página
     window.location.href = "/home";
 }
 

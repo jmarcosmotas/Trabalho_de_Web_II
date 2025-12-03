@@ -1,3 +1,5 @@
+const botaoCancelar = document.getElementById("botao-cancelar");
+
 const nome = document.getElementById("nome-pessoa");
 const cpf = document.getElementById("cpf");
 const dataNascimento = document.getElementById("data-nascimento");
@@ -42,24 +44,61 @@ function mostrarPopUp(titulo, mensagem) {
 }
 
 if (!usuario || !usuario.nome) {
-   window.location.href = "/login";
+    window.location.href = "/login";
 } else {
     fetch("http://127.0.0.1:5000/api/consultas-comfirmadas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cpf: usuario.cpf })
     })
-    .then(res => res.json().then(data => ({ ok: res.ok, data })))
-    .then(({ ok, data }) => {
-        if (ok && data.status === "ok") {
-            preencherCampos(data);
-        } else {
-            mostrarPopUp("Aviso!", data.error || "Nenhuma consulta encontrada.");
+        .then(res => res.json().then(data => ({ ok: res.ok, data })))
+        .then(({ ok, data }) => {
+            if (ok && data.status === "ok") {
+                preencherCampos(data);
+            } else {
+                mostrarPopUp("Aviso!", data.error || "Nenhuma consulta encontrada.");
+            }
+        })
+        .catch(err => {
+            console.error("Erro ao buscar dados:", err);
+            mostrarPopUp("Erro!", "Falha na comunicação com o servidor.");
+        });
+
+    let popUpCancelamentoAtivo = false; // flag para identificar o pop-up de cancelamento
+
+    botaoCancelar.addEventListener("click", () => {
+        popUpCancelamentoAtivo = true; // ativa a flag
+        mostrarPopUp("Cancelar Consulta", "Tem certeza que deseja cancelar a consulta?");
+
+        popUpOk.onclick = () => {
+            popUp.style.display = "none";
+            popUpCancelamentoAtivo = false; // desativa a flag
+
+            fetch("http://127.0.0.1:5000/api/cancelar-consulta", {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ cpf: usuario.cpf })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "ok") {
+                        window.location.href = "/";
+                    } else {
+                        mostrarPopUp("Aviso!", data.error || "Não foi possível cancelar a consulta.");
+                    }
+                })
+                .catch(err => {
+                    console.error("Erro ao cancelar consulta:", err);
+                    mostrarPopUp("Erro!", "Falha na comunicação com o servidor.");
+                });
+        };
+    });
+
+    popUp.addEventListener("click", (e) => {
+        if (e.target === popUp && popUpCancelamentoAtivo) {
+            popUp.style.display = "none";
+            popUpCancelamentoAtivo = false; 
         }
-    })
-    .catch(err => {
-        console.error("Erro ao buscar dados:", err);
-        mostrarPopUp("Erro!", "Falha na comunicação com o servidor.");
     });
 }
 
@@ -69,3 +108,5 @@ if (popUpOk) {
         window.location.href = "/";
     });
 }
+
+

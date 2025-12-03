@@ -73,12 +73,12 @@ class Consulta(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     
-    cpf = db.Column(db.String(14), db.ForeignKey("usuario.cpf"), nullable=False)
-    crm = db.Column(db.String(6), db.ForeignKey("medico.crm"), nullable=False)
+    cpf_fk = db.Column(db.String(14), db.ForeignKey("usuario.cpf"), nullable=False)
+    crm_fk = db.Column(db.String(6), db.ForeignKey("medico.crm"), nullable=False)
     
     data = db.Column(db.String(10), nullable=False)
     horario = db.Column(db.String(5), nullable=False)
-    endereco = db.Column(db.String(50), nullable=False)
-    cidade = db.Column(db.String(30), nullable=False)
-    especialidade = db.Column(db.String(30), nullable=False)
-    hospital = db.Column(db.String(30), nullable=False)
+    
+    cidade_fk = db.Column(db.Integer, db.ForeignKey("cidade.id"), nullable=False)
+    especialidade_fk = db.Column(db.Integer, db.ForeignKey("especialidade.id"), nullable=False)
+    hospital_fk = db.Column(db.Integer, db.ForeignKey("hospital.id"), nullable=False)

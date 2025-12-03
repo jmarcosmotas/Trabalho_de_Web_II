@@ -27,20 +27,20 @@ const params = new URLSearchParams(window.location.search);
 const origem = params.get('origem');
 
 function preencherCampos() {
-  nome.value = usuario?.nome || '';
-  cpf.value = usuario?.cpf || '';
-  dataNascimento.value = usuario?.data || '';
-  telefone.value = usuario?.telefone || '';
+  nome.value = usuario.nome || '';
+  cpf.value = usuario.cpf || '';
+  dataNascimento.value = usuario.data || '';
+  telefone.value = usuario.telefone || '';
 
-  medico.value = infoConsulta?.medico || '';
-  crm.value = infoConsulta?.crm || '';
-  horario.value = infoConsulta?.horario || '';
-  dataConsulta.value = infoConsulta?.data || '';
-  endereco.value = infoConsulta?.endereco || '';
+  medico.value = infoConsulta.medico || '';
+  crm.value = infoConsulta.crm || '';
+  horario.value = infoConsulta.horario || '';
+  dataConsulta.value = infoConsulta.data || '';
+  endereco.value = infoConsulta.endereco || '';
 
-  hospital.value = agendamento?.hospital || '';
-  cidade.value = agendamento?.cidade || '';
-  especialidade.value = agendamento?.especialista || '';
+  hospital.value = agendamento.hospitalNome || '';
+  cidade.value = agendamento.cidadeNome || '';
+  especialidade.value = agendamento.especialistaNome || '';
 }
 
   preencherCampos();
@@ -50,18 +50,17 @@ function preencherCampos() {
       if (!usuario || !infoConsulta || !agendamento) return;
 
       const dadosUsuario = {
-        hospital: agendamento.hospital,
-        cidade: agendamento.cidade,
-        especialidade: agendamento.especialista,
+        hospital: agendamento.hospitalId,
+        cidade: agendamento.cidadeId,
+        especialidade: agendamento.especialistaId,
         cpf: usuario.cpf,
         crm: infoConsulta.crm,
-        medico: infoConsulta.medico,
         horario: infoConsulta.horario,
         data: infoConsulta.data,
-        endereco: infoConsulta.endereco
       };
+      console.log(dadosUsuario)
 
-      fetch("http://127.0.0.1:5000/api/confirma-consulta", {
+      fetch("http://127.0.0.1:5000/api/confirma-consulta",{
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dadosUsuario)

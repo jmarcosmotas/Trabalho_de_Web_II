@@ -14,7 +14,7 @@ console.log(agendamentoId.especialista);
 console.log(agendamentoId);
 async function requisicao() {
     try {
-        const response = await fetch(`http://127.0.0.1:5000/api/info?hospital=${agendamentoId.hospital}&especialidade=${agendamentoId.especialista}`);
+        const response = await fetch(`http://127.0.0.1:5000/api/info?hospital=${agendamentoId.hospitalId}&especialidade=${agendamentoId.especialistaId}`);
 
         const data = await response.json();
         console.log(data)
